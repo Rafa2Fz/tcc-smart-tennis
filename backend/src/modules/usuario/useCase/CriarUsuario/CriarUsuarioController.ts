@@ -5,8 +5,8 @@ import { CriarUsuarioUseCase } from "./CriarUsuarioUseCase";
 
 
 export class CriarUsuarioController {
-    public async criar(request: Request, response: Response, next: NextFunction) {
-
+    public async handler(request: Request, response: Response, next: NextFunction) {
+        console.log(request.usuario)
         const criarUsuarioUseCase = container.resolve(CriarUsuarioUseCase)
         const { email, nome, password } = request.body
 

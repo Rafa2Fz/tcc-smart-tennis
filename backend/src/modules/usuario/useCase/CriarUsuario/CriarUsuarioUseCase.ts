@@ -1,6 +1,7 @@
 import { Usuario } from "entity/Usuario";
 import { IUsuarioDTO } from "modules/usuario/dto/IUsuarioDTO";
 import { IUsuarioRepositorio } from "modules/usuario/repositories/IUsuarioRepositorio";
+import { IHashProvider } from "shared/container/providers/HashProvider/IHashProvider";
 import { AppError } from "shared/error/AppError";
 import { inject, injectable } from "tsyringe";
 
@@ -17,6 +18,9 @@ export class CriarUsuarioUseCase {
         @inject("UsuarioRepositorio")
         public usuarioRepositorio: IUsuarioRepositorio,
 
+        @inject('HashProvider')
+        public hashProvider: IHashProvider
+
     ) { }
     public async executar({ email, nome, password }: Request): Promise<IUsuarioDTO> {
 
@@ -26,14 +30,18 @@ export class CriarUsuarioUseCase {
             throw new AppError('Email já cadastrado!', 401)
         }
 
+        const senhaCriptografada = await this.hashProvider.gerarHash(password, 8)
+
         const usuario = await this.usuarioRepositorio.criar({
             nome,
             email,
-            password,
-            tipoUsuarioId: 2
+            password: senhaCriptografada,
+            tipoUsuarioId: 2,
+
         })
 
         await this.usuarioRepositorio.salvar(usuario)
+
 
         return usuario
     }

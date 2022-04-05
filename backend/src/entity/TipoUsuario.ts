@@ -3,8 +3,8 @@ import { Column, PrimaryGeneratedColumn, Entity } from 'typeorm';
 @Entity()
 export class TipoUsuario {
     @PrimaryGeneratedColumn()
-    id: number;
+    public id: number;
 
     @Column()
-    name: string
+    public name: string
 }

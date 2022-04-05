@@ -13,7 +13,7 @@ export class UsuarioRepositorio implements IUsuarioRepositorio {
         this.tipoUsuarioRepositorio = getRepository(TipoUsuario)
     }
 
-    public async criar(usuarioData: Omit<Usuario, "id" | "tipoUsuario">): Promise<Usuario> {
+    public async criar(usuarioData: Pick<Usuario, "email" | "nome" | "password" | "tipoUsuarioId">): Promise<Usuario> {
         const { email, nome, password, tipoUsuarioId } = usuarioData
 
         const tipoUsuario = await this.tipoUsuarioRepositorio.findOne(tipoUsuarioId)
@@ -45,5 +45,16 @@ export class UsuarioRepositorio implements IUsuarioRepositorio {
         const usuario = await this.usuarioRepositorio.findOne({ where: { email } })
 
         return usuario
+    }
+
+    public async buscarPorId(id: string): Promise<Usuario | undefined> {
+        const usuario = await this.usuarioRepositorio.findOne({ where: { id } })
+
+        return usuario
+    }
+
+    async atualizarCreditoUsuario(usuario: Usuario): Promise<Usuario> {
+        const usuarioAtualizado = await this.usuarioRepositorio.save(usuario)
+        return usuarioAtualizado
     }
 }

@@ -1,7 +1,9 @@
 import { Usuario } from "entity/Usuario";
 
 export interface IUsuarioRepositorio {
-    criar(usuario: Omit<Usuario, "id" | "tipoUsuario">): Promise<Usuario>
+    criar(usuario: Pick<Usuario, "email" | "nome" | "password" | "tipoUsuarioId">): Promise<Usuario>
     salvar(usuario: Usuario): Promise<Usuario>
-    buscarPorEmail(id: string): Promise<Usuario | undefined>
+    buscarPorEmail(email: string): Promise<Usuario | undefined>
+    buscarPorId(id: string): Promise<Usuario | undefined>
+    atualizarCreditoUsuario(usuario: Usuario): Promise<Usuario>
 }
