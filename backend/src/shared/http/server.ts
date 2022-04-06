@@ -3,11 +3,21 @@ import 'config/database'
 import 'shared/container'
 import 'express-async-errors'
 
+import dotenv from 'dotenv';
 import express, { Request, Response } from 'express'
 import rotas from './routes';
 import { AppError } from "shared/error/AppError";
+import path from 'path'
+
+
+dotenv.config({
+    path: process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env',
+    override: true
+})
+
 
 const app = express()
+
 
 app.use(express.json());
 
@@ -26,6 +36,6 @@ app.use((err, request: Request, response: Response, next) => {
     }
 })
 
-app.listen('3003', () => {
-    console.log('Server iniciado na porta 3003')
+app.listen(`${process.env.PORT}`, () => {
+    console.log(`Server iniciado na porta ${process.env.PORT}`)
 })

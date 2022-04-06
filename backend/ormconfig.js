@@ -1,6 +1,6 @@
-{
+module.exports = {
    "type": "postgres",
-   "host": "localhost",
+   "host": `${process.env.DATABASE_URL}`,
    "port": 5432,
    "username": "postgres",
    "password": "postgres",
@@ -8,7 +8,7 @@
    "synchronize": false,
    "logging": false,
    "entities": [
-      "src/entity/**/*.ts"
+      `${process.env.NODE_ENV === 'dev' ? 'src' : 'dist'}/entity/**/*.ts`
    ],
    "migrations": [
       "src/migration/**/*.ts"
