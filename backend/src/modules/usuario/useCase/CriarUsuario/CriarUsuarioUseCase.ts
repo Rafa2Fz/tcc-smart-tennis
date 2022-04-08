@@ -27,7 +27,7 @@ export class CriarUsuarioUseCase {
         const usuarioExiste = await this.usuarioRepositorio.buscarPorEmail(email)
 
         if (usuarioExiste) {
-            throw new AppError('Email já cadastrado!', 401)
+            throw new AppError('Email já cadastrado!', 400)
         }
 
         const senhaCriptografada = await this.hashProvider.gerarHash(password, 8)

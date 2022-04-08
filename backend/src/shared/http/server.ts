@@ -8,6 +8,7 @@ import express, { Request, Response } from 'express'
 import rotas from './routes';
 import { AppError } from "shared/error/AppError";
 import path from 'path'
+import cors from 'cors'
 
 
 dotenv.config({
@@ -18,7 +19,7 @@ dotenv.config({
 
 const app = express()
 
-
+app.use(cors())
 app.use(express.json());
 
 app.use(rotas)

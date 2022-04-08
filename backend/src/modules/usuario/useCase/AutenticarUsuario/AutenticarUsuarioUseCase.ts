@@ -27,14 +27,14 @@ export class AutenticarUsuario {
         const usuarioExiste = await this.usuarioRepositorio.buscarPorEmail(email)
 
         if (!usuarioExiste) {
-            throw new AppError('Não foi possível encontrar sua conta.', 200)
+            throw new AppError('Não foi possível encontrar sua conta.', 400)
         }
 
 
         const passwordIguais = await this.hashProvider.compare(password, usuarioExiste.password)
 
         if (!passwordIguais) {
-            throw new AppError('Senha incorreta.', 200)
+            throw new AppError('Senha incorreta.', 400)
         }
         const { id, nome, tipoUsuario, } = usuarioExiste
         const token = await this.jsonWebToken.sign<IUsuarioDTO>({
