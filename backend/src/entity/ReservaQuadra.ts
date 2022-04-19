@@ -8,7 +8,7 @@ export class ReservaQuadra {
     @PrimaryGeneratedColumn()
     public id: number
 
-    @Column({ type: "timestamp", nullable: false })
+    @Column({ type: "timestamp with time zone", nullable: false })
     public horario: Date
 
     @Column({ type: 'boolean' })

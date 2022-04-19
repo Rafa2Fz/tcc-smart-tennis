@@ -1,5 +1,4 @@
 import React from "react";
-import api from "../config/connection";
 
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,8 +10,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 
-import { useToast } from "../hooks/toast";
-import { AxiosError } from "axios";
+import { useUsuario } from "../../hooks/user";
 
 interface IFormInputs {
   email: string;
@@ -26,25 +24,13 @@ const schema = yup
   })
   .required();
 const Login: React.FC = () => {
-  const { addToast } = useToast();
+  const { login } = useUsuario();
   const { handleSubmit, control } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
   });
 
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
-    try {
-      const resposta = await api.post("/auth", data);
-      console.log(resposta);
-    } catch (error) {
-      const err = error as AxiosError;
-      if (err.response) {
-        let message = err.response.data;
-        addToast({ text: message, type: "error" });
-      } else {
-        let message = err.message;
-        addToast({ text: message, type: "error" });
-      }
-    }
+    await login(data.email, data.password);
   };
 
   return (
