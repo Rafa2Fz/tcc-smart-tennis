@@ -11,5 +11,6 @@ export interface IReservaQuadraRepositorio {
     verificarReservaUsuario(data: Date, usuario:Usuario): Promise<ReservaQuadra | undefined>
 
     verificarReservaPorDia(data: Date): Promise<ReservaQuadra | undefined>
-    
+    verificarReservasMes(data: Date): Promise<ReservaQuadra[]>
+    horariosIndisponiveisDia(data: Date, quadraId: number): Promise<number[]>
 }

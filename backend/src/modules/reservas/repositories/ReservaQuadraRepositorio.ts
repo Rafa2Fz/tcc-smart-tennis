@@ -5,6 +5,7 @@ import { Usuario } from "entity/Usuario";
 import { ReservaQuadra } from "entity/ReservaQuadra";
 import { Quadra } from "entity/Quadra";
 import { Folga } from "entity/Folga";
+import { getDaysInMonth } from "date-fns";
 
 
 
@@ -82,4 +83,53 @@ export class ReservaQuadraRepositorio implements IReservaQuadraRepositorio {
 
         return reserva
     }
+
+    async verificarReservasMes(data: Date): Promise<ReservaQuadra[]> {
+        const ano = data.getFullYear()
+        const mes = data.getMonth()
+        
+        
+        const dataInicio = new Date(ano, mes, 1)
+        const dataFim = new Date(ano,mes, getDaysInMonth(data))
+        
+      
+        const reserva = await this.reservaRepositorio.find({
+            where: {
+                horario: Between(data, dataFim)
+                
+            }
+        })
+
+        
+        return reserva
+    }
+
+   async horariosIndisponiveisDia(data: Date, quadraId: number ): Promise<number[]>{
+    const quadra = await this.quadraRepositorio.findOne(quadraId)
+    const horarioIndisponiveis: number[] = []
+    
+    const dataFim = new Date(data)
+    dataFim.setHours(23, 59, 59)
+   
+    const reserva = await this.reservaRepositorio.find({
+        where: {
+            horario: Between(data, dataFim),
+            quadra
+        }
+    })
+
+    for(let i = 0;  i < reserva.length; i++) {
+        const disponivel = await this.verificarDataDisponivel(reserva[i].horario, quadraId);
+        if(!disponivel) {
+            let hora = reserva[i].horario.getHours()
+            if(!horarioIndisponiveis.includes(hora)){
+             horarioIndisponiveis.push(hora)
+                
+           }
+        }
+    }
+    
+    return horarioIndisponiveis
+}
+   
 }

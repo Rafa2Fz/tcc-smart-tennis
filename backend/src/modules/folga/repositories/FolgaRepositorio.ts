@@ -1,5 +1,6 @@
+import { getDaysInMonth } from "date-fns";
 import { Folga } from "entity/Folga";
-import { getRepository, Repository } from "typeorm";
+import { Between, getRepository, Repository } from "typeorm";
 import { IFolgaRepositorio } from "./IFolgaRepositorio";
 
 export class FolgaRepositorio implements IFolgaRepositorio{
@@ -23,4 +24,25 @@ export class FolgaRepositorio implements IFolgaRepositorio{
 
         return folga
     }
+
+    async verificarFolgasMes(data: Date): Promise<Folga[]> {
+        const ano = data.getFullYear()
+        const mes = data.getMonth()
+        
+        
+        const dataInicio = new Date(ano, mes, 1)
+        const dataFim = new Date(ano,mes, getDaysInMonth(data))
+        
+      
+        const folga = await this.folgaRepositorio.find({
+            where: {
+                data: Between(dataInicio, dataFim)
+                
+            }
+        })
+
+        
+        return folga
+    }
+    
 }

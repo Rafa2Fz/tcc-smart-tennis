@@ -8,7 +8,6 @@ interface IRequiredAuth {
 function RequireAuth({ isPrivate = false, children }: IRequiredAuth) {
   let auth = useUsuario();
   let location = useLocation();
-  console.log(isPrivate);
 
   return isPrivate === !!auth.user ? (
     children

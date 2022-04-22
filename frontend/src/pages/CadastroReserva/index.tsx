@@ -5,24 +5,24 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import ptLocale from "date-fns/locale/pt";
 
-import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import { Box } from "@mui/material";
-
 import api from "../../config/connection";
 import { AxiosError } from "axios";
 
-import QuadroReserva from "../../components/QuadroReserva";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import { Box } from "@mui/material";
+import { Container } from "@mui/material";
+
 import { useToast } from "../../hooks/toast";
 
-const Dashboard: React.FC = () => {
+const CadastroReserva: React.FC = () => {
   const { addToast } = useToast();
   const [date, setDate] = useState<Date | null>(new Date());
   const [diasIndisponiveis, setDiasIndisponiveis] = useState<number[]>([]);
 
   useEffect(() => {
-    const diasIndisponiveisF = async () => {
+    const verificarDiasIndisponiveis = async () => {
       try {
         const resposta = await api.post(
           "/reservas/verificarDiasIndisponiveisMes",
@@ -48,17 +48,19 @@ const Dashboard: React.FC = () => {
       }
     };
     if (date) {
-      diasIndisponiveisF();
+      verificarDiasIndisponiveis();
     }
-  }, [date]);
+  }, [date, addToast]);
 
   const disableDays = (day: Date) => {
     return diasIndisponiveis.includes(day.getDate()) ? true : false;
   };
-
+  const onSubmit = async () => {
+    console.log("Bu");
+  };
   return (
-    <Box mt={5}>
-      <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptLocale}>
+    <Container maxWidth="xs">
+      <Box mt="15px">
         <Grid
           container
           direction="column"
@@ -66,31 +68,39 @@ const Dashboard: React.FC = () => {
           alignItems="center"
         >
           <Grid item>
-            <DatePicker
-              shouldDisableDate={disableDays}
-              label="Selecionar Data Reserva"
-              openTo="year"
-              views={["year", "month", "day"]}
-              value={date}
-              onChange={(newDate) => {
-                setDate(newDate);
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
+            <LocalizationProvider
+              dateAdapter={AdapterDateFns}
+              locale={ptLocale}
+            >
+              <DatePicker
+                shouldDisableDate={disableDays}
+                label="Selecionar Data Reserva"
+                openTo="year"
+                views={["year", "month", "day"]}
+                value={date}
+                onMonthChange={(newDate) => {
+                  setDate(newDate);
+                }}
+                onYearChange={(newDate) => {
+                  setDate(newDate);
+                }}
+                disablePast
+                onChange={(newDate) => {
+                  setDate(newDate);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
           </Grid>
           <Grid item>
-            <Stack spacing={3}>
-              <QuadroReserva />
-              <QuadroReserva />
-              <QuadroReserva />
-              <QuadroReserva />
-              <QuadroReserva />
-            </Stack>
+            <Button fullWidth onClick={onSubmit}>
+              Enviar
+            </Button>
           </Grid>
         </Grid>
-      </LocalizationProvider>
-    </Box>
+      </Box>
+    </Container>
   );
 };
 
-export default Dashboard;
+export default CadastroReserva;

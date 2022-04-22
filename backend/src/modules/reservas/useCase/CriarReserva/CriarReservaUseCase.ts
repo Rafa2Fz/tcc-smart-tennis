@@ -32,6 +32,11 @@ export class CriarReservaUseCase {
     ) { }
 
     public async execute({ usuarioId, quadraId, personal, horario }: IDataRequest) {
+        
+        if(quadraId === 1) {
+            personal = true
+        }
+
         const expedienteDia =[1, 2, 3, 4, 5]
         const expedienteHora =[6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17]
 
