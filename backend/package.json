@@ -5,9 +5,10 @@
    "main": "index.js",
    "scripts": {
       "build": "tsc",
-      "start": "SET NODE_ENV=dev&& ts-node src/shared/http/server.ts",
-      "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
-      "production": "node -r ts-node/register/transpile-only -r tsconfig-paths/register build/shared/http/server.js"
+      "dev": "SET NODE_ENV=dev&& ts-node src/shared/http/server.ts",
+      "typeorm": "SET NODE_ENV=dev&& node --require ts-node/register ./node_modules/typeorm/cli.js",
+      "typeorm:production": "node --require ts-node/register ./node_modules/typeorm/cli.js",
+      "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register build/shared/http/server.js"
    },
    "keywords": [],
    "author": "",

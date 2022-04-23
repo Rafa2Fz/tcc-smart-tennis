@@ -5,11 +5,11 @@ import { DiasIndisponiveisMesUseCase } from "./DiasIndisponiveisMesUseCase";
 export class DiasIndisponiveisMesController {
 
     async index(request: Request, response: Response) {
-        const reservasMesDisponiveis = container.resolve(DiasIndisponiveisMesUseCase)
+        const diasIndisponiveisMesUseCase = container.resolve(DiasIndisponiveisMesUseCase)
         const {date, quadraId} = request.body
         
-        const indisponiveis = await reservasMesDisponiveis.execute({date, quadraId })
-
+        const indisponiveis = await diasIndisponiveisMesUseCase.execute({date, quadraId })
+        
         response.json(indisponiveis)
     }
 }
