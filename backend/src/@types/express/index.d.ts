@@ -1,9 +1,9 @@
-import { Usuario } from "entity/Usuario";
+import { IUsuarioDTO } from "modules/usuario/dto/IUsuarioDTO";
 
 declare global {
     namespace Express {
         interface Request {
-            usuario: Omit<Usuario, "password" | "tipoUsuarioId">
+            usuario: IUsuarioDTO
         }
     }
 
