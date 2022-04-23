@@ -26,7 +26,7 @@ export function ensureAuthenticated(request: Request, response: Response, next: 
     const tokenValido = verify(token, secret)
 
     const { id, nome, email, tipoUsuario } = tokenValido as Payload
-    console.log({id, nome, email, tipoUsuario})
+    
     request.usuario = {
         id,
         nome,
