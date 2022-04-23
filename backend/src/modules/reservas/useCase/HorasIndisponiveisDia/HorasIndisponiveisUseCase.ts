@@ -23,6 +23,7 @@ export class HorasIndisponiveisUseCase {
         const verificaData = new Date(ano, mes, dia)
         
         const horasIndisponiveis = await this.reservaQuadraRepositorio.horariosIndisponiveisDia(verificaData, quadraId)
+        console.log(horasIndisponiveis)
 
         return horasIndisponiveis
     }
