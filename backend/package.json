@@ -3,6 +3,10 @@
    "version": "1.0.0",
    "description": "",
    "main": "index.js",
+   "engines": {
+      "node": "14.17.x",
+      "npm": "8.3.x"
+    },
    "scripts": {
       "build": "tsc",
       "dev": "SET NODE_ENV=dev&& ts-node src/shared/http/server.ts",
