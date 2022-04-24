@@ -1,4 +1,4 @@
-console.log(process.env.DATABASE_URL)
+
 const local =  {
    "type": "postgres",
    "host": "localhost",
@@ -38,7 +38,7 @@ const producao =  {
       "dist/entity/**/*.js"
    ],
    "migrations": [
-      "dist/migration/**/*.js"
+      "src/migration/**/*.js"
    ],
    "subscribers": [
       "dist/subscriber/**/*.js"
