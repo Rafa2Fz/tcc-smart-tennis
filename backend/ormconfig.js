@@ -30,7 +30,9 @@ const producao =  {
    "synchronize": false,
    "logging": false,
    "extra": {
-      "ssl": true
+      "ssl": {
+         "rejectUnauthorized": false,
+       }
    },
    "entities": [
       "dist/entity/**/*.js"
