@@ -1,3 +1,4 @@
+console.log(process.env.DATABASE_URL)
 const local =  {
    "type": "postgres",
    "host": "localhost",
@@ -28,6 +29,9 @@ const producao =  {
    "url": `${process.env.DATABASE_URL}`,
    "synchronize": false,
    "logging": false,
+   "extra": {
+      "ssl": true
+   },
    "entities": [
       "dist/entity/**/*.js"
    ],
