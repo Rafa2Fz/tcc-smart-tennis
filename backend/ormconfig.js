@@ -38,7 +38,7 @@ const producao =  {
       "dist/entity/**/*.js"
    ],
    "migrations": [
-      "src/migration/**/*.js"
+      "src/migration/**/*.ts"
    ],
    "subscribers": [
       "dist/subscriber/**/*.js"
