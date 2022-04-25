@@ -1,47 +1,22 @@
 
-const local =  {
+ module.exports = {
    "type": "postgres",
-   "host": "localhost",
-   "port": 5432,
-   "username": "postgres",
-   "password": "postgres",
-   "database": "beach-tennis",
+   "url": `${process.env.NODE_ENV === "dev"? process.env.LOCAL_URL: process.env.DATABASE_URL}`,
    "synchronize": false,
    "logging": false,
-   "entities": [
-      "src/entity/**/*.ts"
-   ],
-   "migrations": [
-      "src/migration/**/*.ts"
-   ],
-   "subscribers": [
-      "src/subscriber/**/*.ts"
-   ],
-   "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
-   }
-}
-
-const producao =  {
-   "type": "postgres",
-   "url": `${process.env.DATABASE_URL}`,
-   "synchronize": false,
-   "logging": false,
-   "extra": {
+   "extra": `${process.env.NODE_ENV === "dev"? {}:  {
       "ssl": {
          "rejectUnauthorized": false,
        }
-   },
+   }}`,
    "entities": [
-      "build/entity/**/*.js"
+     'src/entity/**/*.ts'
    ],
    "migrations": [
-      "build/migration/**/*.ts"
+     'src/migration/**/*.ts'
    ],
    "subscribers": [
-      "build/subscriber/**/*.js"
+    'src/subscriber/**/*.ts'
    ],
    "cli": {
       "entitiesDir": "src/entity",
@@ -49,5 +24,3 @@ const producao =  {
       "subscribersDir": "src/subscriber"
    }
 }
-
-module.exports = process.env.NODE_ENV === 'dev'? local:producao

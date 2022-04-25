@@ -37,6 +37,6 @@ app.use((err, request: Request, response: Response, next) => {
     }
 })
 
-app.listen(`${process.env.PORT || 3000}`, () => {
-    console.log(`Server iniciado na porta ${process.env.PORT? process.env.PORT:3000}`)
+app.listen(`${process.env.PORT || 3003}`, () => {
+    console.log(`Server iniciado na porta ${process.env.PORT? process.env.PORT:3003}`)
 })
