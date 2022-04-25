@@ -35,13 +35,13 @@ const producao =  {
        }
    },
    "entities": [
-      "dist/entity/**/*.js"
+      "build/entity/**/*.js"
    ],
    "migrations": [
-      "src/migration/**/*.ts"
+      "build/migration/**/*.ts"
    ],
    "subscribers": [
-      "dist/subscriber/**/*.js"
+      "build/subscriber/**/*.js"
    ],
    "cli": {
       "entitiesDir": "src/entity",
