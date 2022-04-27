@@ -8,8 +8,8 @@ export class AdicionaTipoUsuario1650922290048 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`DELETE FROM tipo_usuario WHERE id = 1)`);
-        await queryRunner.query(`DELETE FROM tipo_usuario WHERE id = 2)`);
+        await queryRunner.query(`DELETE FROM tipo_usuario WHERE id = 1`);
+        await queryRunner.query(`DELETE FROM tipo_usuario WHERE id = 2`);
     
     }
 

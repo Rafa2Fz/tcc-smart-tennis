@@ -60,7 +60,7 @@ export class CriarReservaUseCase {
         }
         
         if(!expedienteHora.includes(reservaData.getHours())){
-            throw new AppError('Não é possivel fazer reserva para o horário de expediente', 400)
+            throw new AppError('Não é possivel fazer reserva para este horário', 400)
         }
         const existeFolga = await this.folgaRepositorio.verificarFolga(folgaData)
         

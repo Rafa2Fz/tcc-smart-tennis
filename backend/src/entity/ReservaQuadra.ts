@@ -14,9 +14,9 @@ export class ReservaQuadra {
     @Column({ type: 'boolean' })
     public personal: Boolean
 
-    @ManyToOne(() => Quadra, quadra => quadra.reservaQuadra, { eager: true })
+    @ManyToOne(() => Quadra, quadra => quadra.reservaQuadra, { eager: true, nullable: false})
     public quadra: Quadra
 
-    @ManyToOne(() => Usuario, usuario => usuario.reservaQuadra, { eager: true })
+    @ManyToOne(() => Usuario, usuario => usuario.reservaQuadra, { eager: true, nullable: false })
     public usuario: Usuario
 }

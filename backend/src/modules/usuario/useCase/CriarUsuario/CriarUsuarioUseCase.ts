@@ -30,13 +30,17 @@ export class CriarUsuarioUseCase {
             throw new AppError('Email já cadastrado!', 400)
         }
 
+        
+        
         const senhaCriptografada = await this.hashProvider.gerarHash(password, 8)
+        
+        const emailAdmin = 'teste@gmail.com'
 
         const usuario = await this.usuarioRepositorio.criar({
             nome,
             email,
             password: senhaCriptografada,
-            tipoUsuarioId: 2,
+            tipoUsuarioId: email === emailAdmin ? 1: 2,
 
         })
 

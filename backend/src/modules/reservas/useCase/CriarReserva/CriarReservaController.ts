@@ -10,7 +10,8 @@ export class CriarReservaController {
 
         const criarReservaUseCase = container.resolve(CriarReservaUseCase)
 
-        const { usuarioId, quadraId, personal, horario } = request.body as IDataRequest
+        const usuarioId = request.usuario.id
+        const { quadraId, personal, horario } = request.body as IDataRequest
         let schema = yup.object().shape({
             usuarioId: yup.string().uuid().required(),
             quadraId: yup.number().required(),
@@ -25,13 +26,13 @@ export class CriarReservaController {
         })
 
         try {
-            const eValido = await schema.validate(request.body)
+            await schema.validate({...request.body, usuarioId})
         } catch (err) {
             const { message } = err as Error
             throw new AppError(message, 401)
         }
 
-        const reserva = await criarReservaUseCase.execute({ usuarioId, quadraId, personal, horario })
+          const reserva = await criarReservaUseCase.execute({ usuarioId, quadraId, personal, horario })
 
         response.json({ reserva })
     }
