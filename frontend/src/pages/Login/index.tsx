@@ -73,6 +73,7 @@ const Login: React.FC = () => {
                 />
               </Grid>
               <Grid item>
+                {console.log(process.env.REACT_APP_API_URL)}
                 <Button fullWidth type="submit">
                   Enviar
                 </Button>
