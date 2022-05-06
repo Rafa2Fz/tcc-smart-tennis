@@ -68,11 +68,21 @@ export class CriarReservaUseCase {
             throw new AppError('Esta data não está disponivel para reserva', 400)
         }
 
+        
         const usuarioPossuiReserva = await this.reservaQuadraRepositorio.verificarReservaUsuario(reservaData, usuario)
-
+        
         if(usuarioPossuiReserva) {
             throw new AppError('Já possui uma reserva para este horário', 400)
         }
+
+        if(personal) {
+         const personalDisponivel = await this.reservaQuadraRepositorio.verificarHorarioPersonalDisponivel(reservaData, quadraId)
+ 
+          if(!personalDisponivel) {
+              throw new AppError('Professor indisponível para esse horário', 400 )
+          }
+        }
+        
         const disponivel = await this.reservaQuadraRepositorio.verificarDataDisponivel(reservaData, quadraId)
 
         if (!disponivel) {

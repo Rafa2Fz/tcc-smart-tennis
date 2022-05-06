@@ -41,8 +41,11 @@ export class CriarUsuarioUseCase {
             email,
             password: senhaCriptografada,
             tipoUsuarioId: email === emailAdmin ? 1: 2,
+            
 
         })
+
+        usuario.setCredito = 100
 
         await this.usuarioRepositorio.salvar(usuario)
 

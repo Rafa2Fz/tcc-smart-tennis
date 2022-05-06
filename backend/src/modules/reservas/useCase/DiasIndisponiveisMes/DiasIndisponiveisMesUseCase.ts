@@ -29,11 +29,7 @@ export class DiasIndisponiveisMesUseCase {
         const diasIndisponiveisMes = []
         const verificaData = new Date(ano, mes, dia)
         const diasNoMes = getDaysInMonth(verificaData)
-       if(isThisMonth(verificaData)){
-           for(let i = 1; i < dia ; i++) {        
-               diasIndisponiveisMes.push(i)
-           }
-       }
+     
         for(let i = 1; i <= diasNoMes ; i++) {
             let data = new Date(ano, mes, i); 
             if(data.getDay() == 0 || data.getDay() == 6) {

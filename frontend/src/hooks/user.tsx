@@ -6,6 +6,7 @@ import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
 interface IUserContext {
+  logout(): Promise<void>;
   user: IUserPayload;
   login(email: string, password: string): Promise<void>;
 }
@@ -72,8 +73,15 @@ export const UserProvider: React.FC = ({ children }) => {
     [addToast]
   );
 
+  const logout = useCallback(async () => {
+    localStorage.removeItem("@SmartTennis:token");
+    localStorage.removeItem("@SmartTennis:user");
+
+    setData({} as AuthState);
+  }, []);
+
   return (
-    <UserContext.Provider value={{ login, user: data.user }}>
+    <UserContext.Provider value={{ login, logout, user: data.user }}>
       {children}
     </UserContext.Provider>
   );

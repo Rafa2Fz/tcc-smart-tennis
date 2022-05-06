@@ -7,9 +7,10 @@ export class HorasIndisponiveisController {
 
     async index(request: Request, response: Response) {
         const horasIndisponiveisUseCase = container.resolve(HorasIndisponiveisUseCase)
-        const {date, quadraId} = request.body
+        const {date, quadraId, personal} = request.body
+        const usuarioId = request.usuario.id
         
-        const indisponiveis = await horasIndisponiveisUseCase.execute({date, quadraId })
+        const indisponiveis = await horasIndisponiveisUseCase.execute({date, quadraId, personal, usuarioId })
         
         response.json(indisponiveis)
     }

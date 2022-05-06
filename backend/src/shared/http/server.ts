@@ -16,7 +16,6 @@ dotenv.config({
     override: true
 })
 
-console.log('Test Deploy')
 
 const app = express()
 

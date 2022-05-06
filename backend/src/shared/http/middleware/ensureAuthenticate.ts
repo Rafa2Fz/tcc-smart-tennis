@@ -23,16 +23,23 @@ export function ensureAuthenticated(request: Request, response: Response, next: 
 
     const { secret } = authConfig
 
-    const tokenValido = verify(token, secret)
+    try {
+        const tokenValido = verify(token, secret)
 
-    const { id, nome, email, tipoUsuario } = tokenValido as Payload
-    
-    request.usuario = {
-        id,
-        nome,
-        email,
-        tipoUsuario
+        const { id, nome, email, tipoUsuario } = tokenValido as Payload
+        request.usuario = {
+            id,
+            nome,
+            email,
+            tipoUsuario
+        }
+
+    } catch(err) {
+        throw new AppError('Token de autenticação inválido ou inexistente!', 401)
     }
+
+   
+    
 
     next()
 

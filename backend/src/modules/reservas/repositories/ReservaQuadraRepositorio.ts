@@ -64,6 +64,34 @@ export class ReservaQuadraRepositorio implements IReservaQuadraRepositorio {
 
     }
 
+    async verificarHorarioPersonalDisponivel(data: Date, quadraId: number): Promise<Boolean> {
+        let disponivel = true
+        const idOposto = quadraId === 1? 2:1
+       
+        const reservas = await this.encontrarReservas(data, idOposto)
+        const [obj, vagas] = reservas
+        
+        if(vagas >= 1) {
+         const personal = obj[0].personal
+
+        if(quadraId === 1  && vagas >= 1) {
+            if(personal) {
+         
+                return false
+            }
+        }
+        
+        if(quadraId === 2) {
+            if(vagas >= 1) {
+              
+                return false
+            }
+        }
+        }
+
+        return disponivel
+    }
+
     async verificarReservaUsuario(data: Date, usuario: Usuario): Promise<ReservaQuadra | undefined> {
         const reserva = await this.reservaRepositorio.findOne({where: {horario: data, usuario}})
         return reserva
@@ -128,8 +156,59 @@ export class ReservaQuadraRepositorio implements IReservaQuadraRepositorio {
            }
         }
     }
-    
+
     return horarioIndisponiveis
 }
+  async reservasUsuarioDia(data: Date,  usuarioId: string, quadraId?: number): Promise<ReservaQuadra[]> {
+      if(quadraId){
+
+          const quadra = await this.quadraRepositorio.findOne(quadraId)
+          const usuario = await this.usuarioRepositorio.findOne(usuarioId)
+          const dataFim = new Date(data)
+          dataFim.setHours(23, 59, 59)
+         
+          const reserva = await this.reservaRepositorio.find({
+              where: {
+                  horario: Between(data, dataFim),
+                  quadra,
+                  usuario
+              }
+          })
+      
+          return reserva
+      }
    
+      const usuario = await this.usuarioRepositorio.findOne(usuarioId)
+      const dataFim = new Date(data)
+      dataFim.setHours(23, 59, 59)
+     
+      const reserva = await this.reservaRepositorio.find({
+          where: {
+              horario: Between(data, dataFim),
+            
+              usuario
+          }
+      })
+  
+      return reserva
+
+  }
+
+ async buscarReservasDia(data: Date): Promise<ReservaQuadra[]> {
+    const dataFim = new Date(data)
+    dataFim.setHours(23, 59, 59)
+   
+    const reserva = await this.reservaRepositorio.find({
+        order: {
+            horario: 'ASC', 
+            quadra:  'ASC'
+        },
+        where: {
+            horario: Between(data, dataFim),
+        
+        }
+    })
+
+    return reserva
+  }
 }

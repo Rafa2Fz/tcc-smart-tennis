@@ -8,88 +8,70 @@ import ptLocale from "date-fns/locale/pt";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import { Box } from "@mui/material";
+import { Box, Fab, Typography } from "@mui/material";
 
-import api from "../../config/connection";
 import { AxiosError } from "axios";
+import api from "../../config/connection";
 
 import QuadroReserva from "../../components/QuadroReserva";
 import { useToast } from "../../hooks/toast";
+import { useUsuario } from "../../hooks/user";
+import Cabecalho from "../../components/Cabecalho";
+import AgendaAluno from "../../components/AgendaAluno";
+import AgendaProfessor from "../../components/AgendaProfessor";
+import { IoMdAddCircle } from "react-icons/io";
+
+import relogioImage from "../../assets/bolaRelogio.png";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard: React.FC = () => {
+  const { logout, user } = useUsuario();
   const { addToast } = useToast();
-  const [date, setDate] = useState<Date | null>(new Date());
-  const [diasIndisponiveis, setDiasIndisponiveis] = useState<number[]>([]);
 
-  useEffect(() => {
-    const diasIndisponiveisF = async () => {
-      try {
-        const resposta = await api.post(
-          "/reservas/verificarDiasIndisponiveisMes",
-          {
-            date: {
-              ano: date?.getFullYear(),
-              mes: date?.getMonth(),
-              dia: date?.getDate(),
-            },
-            quadraId: 1,
-          }
-        );
-        setDiasIndisponiveis(resposta.data);
-      } catch (error) {
-        const err = error as AxiosError;
-        if (err.response) {
-          let message = err.response.data;
-          addToast({ text: message, type: "error" });
-        } else {
-          let message = err.message;
-          addToast({ text: message, type: "error" });
-        }
-      }
-    };
-    if (date) {
-      diasIndisponiveisF();
-    }
-  }, [date]);
+  let navigate = useNavigate();
 
-  const disableDays = (day: Date) => {
-    return diasIndisponiveis.includes(day.getDate()) ? true : false;
+  const handleFazerReserva = () => {
+    navigate("/cadastroReserva");
   };
 
   return (
-    <Box mt={5}>
-      <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptLocale}>
-        <Grid
-          container
-          direction="column"
-          alignContent="center"
-          alignItems="center"
-        >
-          <Grid item>
-            <DatePicker
-              shouldDisableDate={disableDays}
-              label="Selecionar Data Reserva"
-              openTo="year"
-              views={["year", "month", "day"]}
-              value={date}
-              onChange={(newDate) => {
-                setDate(newDate);
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </Grid>
-          <Grid item>
-            <Stack spacing={3}>
-              <QuadroReserva />
-              <QuadroReserva />
-              <QuadroReserva />
-              <QuadroReserva />
-              <QuadroReserva />
-            </Stack>
-          </Grid>
+    <div>
+      <Cabecalho />
+      <Grid container direction="column" alignItems="center">
+        <Grid item>
+          <Box mt={1}>
+            <Fab
+              color="primary"
+              variant="extended"
+              aria-label="add"
+              sx={{ height: "60px" }}
+              onClick={handleFazerReserva}
+            >
+              <Grid container alignItems="center">
+                <Grid item>
+                  <img
+                    src={relogioImage}
+                    alt="Fazer Reserva"
+                    width="50px"
+                    height="50px"
+                  />
+                </Grid>
+                <Grid item>
+                  <Typography>
+                    <strong>Fazer Reserva</strong>
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Fab>
+          </Box>
         </Grid>
-      </LocalizationProvider>
-    </Box>
+        <Grid item>
+          <Box mt={5}>
+            <AgendaProfessor />
+          </Box>
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 

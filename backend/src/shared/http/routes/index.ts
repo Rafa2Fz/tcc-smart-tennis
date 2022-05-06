@@ -9,7 +9,7 @@ const rotas = Router()
 
 rotas.use('/usuario', usuarioRotas)
 rotas.use('/auth', sessionRotas)
-rotas.use('/reservas', reservasRotas)
+rotas.use('/reservas', ensureAuthenticated, reservasRotas)
 rotas.use('/folga', ensureAuthenticated, folgaRotas)
 
 
