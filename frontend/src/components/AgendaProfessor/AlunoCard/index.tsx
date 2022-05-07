@@ -24,18 +24,20 @@ const AlunoCard: React.FC<AlunoCardProps> = ({ nome, quadraId }) => {
           </Box>
         </Grid>
         <Grid item sx={{ flexGrow: 1 }}>
-          <Grid container direction="column" alignItems="center">
+          <Grid container direction="column">
             <Grid item>
-              <Box ml={3}>
+              <Box ml={1}>
                 <Typography variant="body1" color="text.primary">
-                  <strong> {nome}</strong>
+                  <strong>
+                    {`${nome.split(" ")[0]} ${nome.split(" ")[1]}`}
+                  </strong>
                 </Typography>
               </Box>
             </Grid>
           </Grid>
         </Grid>
         <Grid item>
-          <Box m={2} ml={3}>
+          <Box m={1}>
             <Avatar
               src={quadraId === 1 ? aula : quadraTennis}
               sx={{ width: 30, height: 30 }}

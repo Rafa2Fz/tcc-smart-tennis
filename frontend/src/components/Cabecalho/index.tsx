@@ -12,9 +12,11 @@ import logo from "../../assets/logo.png";
 import { Avatar, Grid, Hidden, Link } from "@mui/material";
 import { BsCoin } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
+import { useUsuario } from "../../hooks/user";
 
 const Cabecalho: React.FC = () => {
   const location = useLocation();
+  const { user } = useUsuario();
   return (
     <Box>
       <AppBar position="static">
@@ -32,7 +34,7 @@ const Cabecalho: React.FC = () => {
               <Box sx={{ fontSize: "15px", color: "primary.contrastText" }}>
                 <strong>Bem vindo,</strong>
               </Box>
-              <strong>Fulano</strong>
+              <strong>{user.nome.split(" ")[0]}</strong>
             </Box>
           </Box>
           <Box mr={2}>

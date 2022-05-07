@@ -36,10 +36,6 @@ const ModalConfirmacao: React.FC<Props> = ({ abrir }) => {
   useEffect(() => {
     if (abrir) {
       setOpen(true);
-
-      setTimeout(() => {
-        handleClose();
-      }, 15000);
     }
   }, [abrir]);
 
