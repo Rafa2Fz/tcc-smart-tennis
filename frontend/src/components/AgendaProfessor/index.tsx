@@ -78,7 +78,7 @@ const AgendaProfessor: React.FC = () => {
         for (let i = 0; i < reservas.length; i++) {
           const timeZone = "America/Sao_Paulo";
           const zonedDate = new Date(reservas[i].horario);
-
+          console.log(zonedDate.getHours());
           if (hora === zonedDate.getHours()) {
             return true;
           }
@@ -95,8 +95,9 @@ const AgendaProfessor: React.FC = () => {
         const timeZone = "America/Sao_Paulo";
         const zonedDate = new Date(reserva.horario);
         console.log(reserva);
-        console.log(hora);
+        console.log(hora, "Hora");
         console.log(zonedDate, "zonedDate");
+        console.log(zonedDate.getHours());
 
         if (hora === zonedDate.getHours()) {
           let nome = reserva.usuario.nome;
