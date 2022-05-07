@@ -94,6 +94,10 @@ const AgendaProfessor: React.FC = () => {
       return reservas.map((reserva) => {
         const timeZone = "America/Sao_Paulo";
         const zonedDate = utcToZonedTime(reserva.horario, timeZone);
+        console.log(reserva);
+        console.log(hora);
+        console.log(zonedDate, "zonedDate");
+
         if (hora === zonedDate.getHours()) {
           let nome = reserva.usuario.nome;
           let quadraId = reserva.quadra.id;
