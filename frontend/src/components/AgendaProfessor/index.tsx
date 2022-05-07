@@ -77,7 +77,10 @@ const AgendaProfessor: React.FC = () => {
       if (reservas.length > 0) {
         for (let i = 0; i < reservas.length; i++) {
           const timeZone = "America/Sao_Paulo";
-          const zonedDate = utcToZonedTime(reservas[i].horario, timeZone);
+          const zonedDate = utcToZonedTime(
+            new Date(reservas[i].horario),
+            timeZone
+          );
 
           if (hora === zonedDate.getHours()) {
             return true;
@@ -93,7 +96,7 @@ const AgendaProfessor: React.FC = () => {
     if (reservas.length > 0) {
       return reservas.map((reserva) => {
         const timeZone = "America/Sao_Paulo";
-        const zonedDate = utcToZonedTime(reserva.horario, timeZone);
+        const zonedDate = utcToZonedTime(new Date(reserva.horario), timeZone);
         console.log(reserva);
         console.log(hora);
         console.log(zonedDate, "zonedDate");
