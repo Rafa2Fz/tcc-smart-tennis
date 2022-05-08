@@ -16,7 +16,7 @@ import { useToast } from "../../hooks/toast";
 import api from "../../config/connection";
 import AlunoCard from "./AlunoCard";
 import { format } from "date-fns";
-import { utcToZonedTime } from "date-fns-tz";
+import { utcToZonedTime, zonedTimeToUtc } from "date-fns-tz";
 
 interface ReservaQudara {
   id: string;
@@ -77,9 +77,12 @@ const AgendaProfessor: React.FC = () => {
       if (reservas.length > 0) {
         for (let i = 0; i < reservas.length; i++) {
           const timeZone = "America/Sao_Paulo";
-          const zonedDate = new Date(reservas[i].horario);
-          console.log(zonedDate.getHours());
-          if (hora === zonedDate.getHours()) {
+          const utcTime = zonedTimeToUtc(
+            new Date(reservas[i].horario),
+            timeZone
+          );
+
+          if (hora === utcTime.getHours()) {
             return true;
           }
         }
@@ -93,13 +96,14 @@ const AgendaProfessor: React.FC = () => {
     if (reservas.length > 0) {
       return reservas.map((reserva) => {
         const timeZone = "America/Sao_Paulo";
-        const zonedDate = new Date(reserva.horario);
+
+        const utcTime = zonedTimeToUtc(new Date(reserva.horario), timeZone);
         console.log(reserva);
         console.log(hora, "Hora");
-        console.log(zonedDate, "zonedDate");
-        console.log(zonedDate.getHours());
+        console.log(utcTime, "zonedDate");
+        console.log(utcTime.getHours());
 
-        if (hora === zonedDate.getHours()) {
+        if (hora === utcTime.getHours()) {
           let nome = reserva.usuario.nome;
           let quadraId = reserva.quadra.id;
           return (
