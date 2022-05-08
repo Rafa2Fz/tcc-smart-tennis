@@ -34,7 +34,7 @@ const verde = createTheme({
   },
   palette: {
     primary: {
-      main: "#119b15",
+      main: "#105a12",
     },
     secondary: {
       main: "#f56000",
