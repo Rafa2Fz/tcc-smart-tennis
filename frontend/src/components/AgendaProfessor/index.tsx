@@ -76,13 +76,8 @@ const AgendaProfessor: React.FC = () => {
     (hora: number): boolean => {
       if (reservas.length > 0) {
         for (let i = 0; i < reservas.length; i++) {
-          const timeZone = "America/Sao_Paulo";
-          const utcTime = utcToZonedTime(
-            new Date(reservas[i].horario),
-            timeZone
-          );
-
-          if (hora === utcTime.getHours()) {
+          const horaReserva = new Date(reservas[i].horario).getUTCHours();
+          if (hora === horaReserva) {
             return true;
           }
         }
@@ -97,13 +92,10 @@ const AgendaProfessor: React.FC = () => {
       return reservas.map((reserva) => {
         const timeZone = "America/Sao_Paulo";
 
-        const utcTime = utcToZonedTime(new Date(reserva.horario), timeZone);
+        const horaReserva = new Date(reserva.horario).getHours();
         console.log(reserva);
-        console.log(hora, "Hora");
-        console.log(utcTime, "zonedDate");
-        console.log(utcTime.getHours());
 
-        if (hora === utcTime.getHours()) {
+        if (hora === horaReserva) {
           let nome = reserva.usuario.nome;
           let quadraId = reserva.quadra.id;
           return (
