@@ -46,4 +46,9 @@ export class Usuario {
         return this.credito
     }
 
+    toJSON () {
+        delete this.password;
+        return this;
+}
+
 }

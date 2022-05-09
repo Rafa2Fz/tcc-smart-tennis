@@ -94,6 +94,7 @@ const AgendaProfessor: React.FC = () => {
   const verificarHorasIguais = (hora: number) => {
     if (reservas.length > 0) {
       return reservas.map((reserva) => {
+        console.log(reserva);
         const timeZone = "America/Sao_Paulo";
 
         let dataReserva = new Date(reserva.horario);
