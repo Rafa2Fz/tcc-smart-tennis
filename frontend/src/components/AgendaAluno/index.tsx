@@ -51,6 +51,7 @@ const AgendaAluno: React.FC = () => {
 
         let novaData = new Date(ano, mes, dia, 0, 0, 0, 0);
         const st = novaData.valueOf();
+
         if (isFuture(data)) {
           if (!dataReserva.includes(st)) {
             setDataReserva([...dataReserva, st]);
@@ -82,11 +83,9 @@ const AgendaAluno: React.FC = () => {
         }
       }
     };
-
     buscarReservasAlunos();
-
     adicionaData();
-  });
+  }, [adicionaData, addToast, logout]);
 
   const verificaExpedienteHora = useCallback(
     (hora: number, data: number): boolean => {
@@ -185,7 +184,7 @@ const AgendaAluno: React.FC = () => {
             {reservas.length > 0 ? (
               <Typography variant="h4">Suas Reservas 🤗</Typography>
             ) : (
-              <Typography variant="h4">Você não possui reservas 😞</Typography>
+              <Typography variant="h5">Você não possui reservas 😞</Typography>
             )}
           </Grid>
           {dataReserva.length > 0 &&
