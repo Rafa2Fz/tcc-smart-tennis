@@ -40,6 +40,7 @@ const AgendaAluno: React.FC = () => {
   const expediente = [6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17];
   const [reservas, setReservas] = useState<ReservaQudara[]>([]);
   const [dataReserva, setDataReserva] = useState<number[]>([]);
+  const [firstLoad, setFirstLoad] = useState<boolean>(true);
 
   const adicionaData = useCallback(() => {
     if (reservas.length > 0) {
@@ -83,9 +84,12 @@ const AgendaAluno: React.FC = () => {
         }
       }
     };
-    buscarReservasAlunos();
     adicionaData();
-  }, [adicionaData, addToast, logout]);
+    if (firstLoad) {
+      buscarReservasAlunos();
+      setFirstLoad(false);
+    }
+  }, [firstLoad, adicionaData, addToast, logout]);
 
   const verificaExpedienteHora = useCallback(
     (hora: number, data: number): boolean => {
