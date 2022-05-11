@@ -8,7 +8,8 @@ interface Request {
         mes: number,
         dia: number
     },
-    quadraId?: string
+    quadraId?: string,
+    
 }
 
 @injectable()

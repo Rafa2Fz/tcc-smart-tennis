@@ -15,8 +15,7 @@ import { useUsuario } from "../../hooks/user";
 import { useToast } from "../../hooks/toast";
 import api from "../../config/connection";
 import AlunoCard from "./AlunoCard";
-import { format } from "date-fns";
-import { utcToZonedTime, zonedTimeToUtc } from "date-fns-tz";
+import { format, isToday } from "date-fns";
 
 interface ReservaQudara {
   id: string;
@@ -94,9 +93,6 @@ const AgendaProfessor: React.FC = () => {
   const verificarHorasIguais = (hora: number) => {
     if (reservas.length > 0) {
       return reservas.map((reserva) => {
-        console.log(reserva);
-        const timeZone = "America/Sao_Paulo";
-
         let dataReserva = new Date(reserva.horario);
         let horaReserva = 0;
         process.env.NODE_ENV === "development"
@@ -116,7 +112,7 @@ const AgendaProfessor: React.FC = () => {
     }
   };
 
-  const element1 = (hora: number) => {
+  const horasAgendadas = (hora: number) => {
     return (
       <>
         <Grid item key={hora}>
@@ -133,7 +129,7 @@ const AgendaProfessor: React.FC = () => {
             </Typography>
           </Box>
         </Grid>
-        <Grid item>
+        <Grid item key={hora}>
           <Box ml={7} mt={1}>
             <Stack spacing={1}>{verificarHorasIguais(hora)}</Stack>
           </Box>
@@ -173,10 +169,26 @@ const AgendaProfessor: React.FC = () => {
               </Divider>
             </Box>
           </Grid>
+          <Grid item>
+            {date && isToday(date) && reservas.length === 0 && (
+              <Grid item>
+                <Typography variant="h6">Nenhuma reserva para hoje</Typography>
+              </Grid>
+            )}
+          </Grid>
+          <Grid item>
+            {date && !isToday(date) && reservas.length === 0 && (
+              <Grid item>
+                <Typography variant="h6">
+                  Nenhuma reserva para esta data
+                </Typography>
+              </Grid>
+            )}
+          </Grid>
           <Grid item width={330}>
             <Grid container direction="column">
               {expediente.map((hora) => {
-                return verificaExpedienteHora(hora) ? element1(hora) : "";
+                return verificaExpedienteHora(hora) ? horasAgendadas(hora) : "";
               })}
             </Grid>
           </Grid>

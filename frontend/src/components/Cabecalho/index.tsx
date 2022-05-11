@@ -29,20 +29,36 @@ const Cabecalho: React.FC = () => {
     <Box>
       <AppBar position="static">
         <Toolbar>
-          {dashboard && (
-            <Grid
-              container
-              direction="row"
-              alignItems="center"
-              sx={{ flexGrow: 1 }}
-            >
-              <Grid item>
-                <Hidden mdDown={true}>
-                  <Link href="/dashboard">
-                    <img src={logo} width="200" height="70" alt="" />
-                  </Link>
+          <Grid
+            container
+            direction="row"
+            alignItems="center"
+            sx={{ flexGrow: 1 }}
+          >
+            <Grid item>
+              <Hidden smDown={true}>
+                <Link href="/dashboard">
+                  <img src={logo} width="200" height="70" alt="" />
+                </Link>
+              </Hidden>
+            </Grid>
+            {dashboard === false && (
+              <Box sx={{ flexGrow: 1 }}>
+                <Hidden smUp={true}>
+                  <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}
+                    href="/dashboard"
+                  >
+                    <GoChevronLeft />
+                  </IconButton>
                 </Hidden>
-              </Grid>
+              </Box>
+            )}
+            {dashboard && (
               <Grid item>
                 <Box
                   ml={2}
@@ -65,24 +81,9 @@ const Cabecalho: React.FC = () => {
                   </Box>
                 </Box>
               </Grid>
-            </Grid>
-          )}
-          {dashboard === false && (
-            <Box sx={{ flexGrow: 1 }}>
-              <Hidden smUp={true}>
-                <IconButton
-                  size="large"
-                  edge="start"
-                  color="inherit"
-                  aria-label="menu"
-                  sx={{ mr: 2 }}
-                  href="/dashboard"
-                >
-                  <GoChevronLeft />
-                </IconButton>
-              </Hidden>
-            </Box>
-          )}
+            )}
+          </Grid>
+
           <Box mr={2}>
             <Grid container direction="column" alignItems="center">
               <Grid item>

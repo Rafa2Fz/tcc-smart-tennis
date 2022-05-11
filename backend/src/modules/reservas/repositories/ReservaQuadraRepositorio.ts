@@ -211,4 +211,18 @@ export class ReservaQuadraRepositorio implements IReservaQuadraRepositorio {
 
     return reserva
   }
+
+  async buscarTodasAsReservasDoAluno( usuario: Usuario): Promise<ReservaQuadra[]> {
+    
+    const reservas = await this.reservaRepositorio.find({
+        where:{
+        usuario: usuario
+    },
+        order: {
+            horario: 'DESC'
+    }
+})
+
+    return reservas
+  }
 }

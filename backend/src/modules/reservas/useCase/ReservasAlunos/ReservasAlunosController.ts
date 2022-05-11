@@ -8,7 +8,7 @@ export class ReservasAlunosController {
 
     async index(request: Request, response: Response) {
         const reservasAlunosUseCase = container.resolve(ReservasAlunosUseCase)
-        const {date, quadraId} = request.body
+        const {date, quadraId, usuarioId} = request.body
      
         
         const reservas = await reservasAlunosUseCase.execute({date, quadraId})

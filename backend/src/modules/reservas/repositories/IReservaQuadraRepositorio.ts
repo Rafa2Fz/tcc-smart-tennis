@@ -14,4 +14,5 @@ export interface IReservaQuadraRepositorio {
     verificarHorarioPersonalDisponivel(data: Date,  quadraId: number): Promise<Boolean>
     reservasUsuarioDia(data: Date,  usuarioId: string, quadraId?: number): Promise<ReservaQuadra[]>
     buscarReservasDia(data: Date): Promise<ReservaQuadra[]>
+    buscarTodasAsReservasDoAluno( usuario: Usuario): Promise<ReservaQuadra[]>
 }
