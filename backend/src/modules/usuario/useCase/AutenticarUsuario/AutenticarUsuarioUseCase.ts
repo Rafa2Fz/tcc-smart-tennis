@@ -36,12 +36,15 @@ export class AutenticarUsuario {
         if (!passwordIguais) {
             throw new AppError('Senha incorreta.', 400)
         }
-        const { id, nome, tipoUsuario, } = usuarioExiste
+
+        const creditoUsuario = usuarioExiste.getCredito
+        const { id, nome, tipoUsuario } = usuarioExiste
         const token = await this.jsonWebToken.sign<IUsuarioDTO>({
             id,
             nome,
             email,
-            tipoUsuario
+            tipoUsuario,
+            credito: creditoUsuario
         }, id)
 
         return token

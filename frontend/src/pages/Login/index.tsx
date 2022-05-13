@@ -4,13 +4,22 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { Container, Link, Paper, Stack, Typography } from "@mui/material";
+import {
+  Container,
+  InputAdornment,
+  Link,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 
-import { RiUserAddFill } from "react-icons/ri";
+import { RiUserAddFill, RiLockPasswordFill } from "react-icons/ri";
+
+import { MdEmail } from "react-icons/md";
 
 import { useUsuario } from "../../hooks/user";
 
@@ -85,6 +94,13 @@ const Login: React.FC = () => {
                             fieldState: { error, invalid },
                           }) => (
                             <TextField
+                              InputProps={{
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <MdEmail size={20} />
+                                  </InputAdornment>
+                                ),
+                              }}
                               variant="standard"
                               fullWidth={true}
                               placeholder="Email"
@@ -105,6 +121,13 @@ const Login: React.FC = () => {
                             fieldState: { error, invalid },
                           }) => (
                             <TextField
+                              InputProps={{
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <RiLockPasswordFill size={20} />
+                                  </InputAdornment>
+                                ),
+                              }}
                               variant="standard"
                               fullWidth={true}
                               placeholder="Password"

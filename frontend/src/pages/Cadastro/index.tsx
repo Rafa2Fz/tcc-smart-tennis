@@ -9,8 +9,11 @@ import { TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import InputAdornment from "@mui/material/InputAdornment";
 
-import { FaSignInAlt } from "react-icons/fa";
+import { FaSignInAlt, FaUserCircle } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
 
 import { useUsuario } from "../../hooks/user";
 
@@ -18,6 +21,7 @@ import logo from "../../assets/logo.png";
 import { useToast } from "../../hooks/toast";
 import { AxiosError } from "axios";
 import api from "../../config/connection";
+
 interface IFormInputs {
   email: string;
   nome: string;
@@ -113,6 +117,13 @@ const Cadastro: React.FC = () => {
                                 fieldState: { error, invalid },
                               }) => (
                                 <TextField
+                                  InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <FaUserCircle size={20} />
+                                      </InputAdornment>
+                                    ),
+                                  }}
                                   variant="standard"
                                   placeholder="Nome"
                                   {...field}
@@ -157,6 +168,13 @@ const Cadastro: React.FC = () => {
                             <TextField
                               variant="standard"
                               fullWidth={true}
+                              InputProps={{
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <MdEmail size={20} />
+                                  </InputAdornment>
+                                ),
+                              }}
                               placeholder="Email"
                               {...field}
                               error={invalid}
@@ -177,6 +195,13 @@ const Cadastro: React.FC = () => {
                             <TextField
                               variant="standard"
                               fullWidth={true}
+                              InputProps={{
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <RiLockPasswordFill size={20} />
+                                  </InputAdornment>
+                                ),
+                              }}
                               placeholder="Password"
                               {...field}
                               error={invalid}

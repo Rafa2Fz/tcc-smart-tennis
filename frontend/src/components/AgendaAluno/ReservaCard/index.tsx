@@ -53,7 +53,7 @@ const ReservaCard: React.FC<ReservaCardProps> = ({
             <Grid item sx={{ flexGrow: 1 }}>
               <Box ml={3}>
                 <Typography color="text.primary">
-                  <strong>{nome}</strong>
+                  <strong>{nome.toLowerCase()}</strong>
                 </Typography>
               </Box>
             </Grid>

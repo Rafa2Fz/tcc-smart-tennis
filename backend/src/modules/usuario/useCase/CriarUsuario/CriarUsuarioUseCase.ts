@@ -22,7 +22,7 @@ export class CriarUsuarioUseCase {
         public hashProvider: IHashProvider
 
     ) { }
-    public async executar({ email, nome, password }: Request): Promise<IUsuarioDTO> {
+    public async executar({ email, nome, password }: Request): Promise<Usuario> {
 
         const usuarioExiste = await this.usuarioRepositorio.buscarPorEmail(email)
 
@@ -41,13 +41,13 @@ export class CriarUsuarioUseCase {
             email,
             password: senhaCriptografada,
             tipoUsuarioId: email === emailAdmin ? 1: 2,
-            
 
         })
 
         usuario.setCredito = 100
 
         await this.usuarioRepositorio.salvar(usuario)
+
 
 
         return usuario

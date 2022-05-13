@@ -27,7 +27,7 @@ import ModalConfirmacao from "../../components/ModalConfirmacao";
 import Cabecalho from "../../components/Cabecalho";
 
 const CadastroReserva: React.FC = () => {
-  const { logout } = useUsuario();
+  const { logout, user } = useUsuario();
   const { addToast } = useToast();
   const [date, setDate] = useState<Date | null>();
   const [diasIndisponiveis, setDiasIndisponiveis] = useState<number[]>([]);
@@ -131,6 +131,8 @@ const CadastroReserva: React.FC = () => {
         quadraId: quadraId,
         personal: professor,
       });
+      let descontar = quadraId === 1 ? 20 : 30;
+      user.credito = user.credito - 20;
       setAbrir(true);
     } catch (error) {
       const err = error as AxiosError;
@@ -370,7 +372,15 @@ const CadastroReserva: React.FC = () => {
                       </Button>
                     </Grid>
                     <Grid item>
-                      <Box mt={2}>
+                      <Box mt={1}>
+                        <Typography variant="h6">
+                          <strong>Créditos:</strong>
+                          {`${quadraId === 1 ? "20" : "30"}`}
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item>
+                      <Box mt={1}>
                         <Button
                           fullWidth
                           onClick={onSubmit}

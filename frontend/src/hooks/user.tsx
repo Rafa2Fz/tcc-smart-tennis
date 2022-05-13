@@ -19,6 +19,7 @@ interface IUserPayload {
     id: number;
     name: string;
   };
+  credito: number;
 }
 
 interface AuthState {
