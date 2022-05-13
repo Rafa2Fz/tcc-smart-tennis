@@ -5,5 +5,5 @@ export interface IUsuarioDTO {
     nome: string;
     email: string;
     tipoUsuario: TipoUsuario;
-    credito: number
+    credito?: number
 }
