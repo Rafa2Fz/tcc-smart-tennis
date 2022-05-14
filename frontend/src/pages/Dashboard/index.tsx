@@ -25,33 +25,35 @@ const Dashboard: React.FC = () => {
     <div>
       <Cabecalho />
       <Grid container direction="column" alignItems="center">
-        <Grid item>
-          <Box mt={1}>
-            <Fab
-              color="primary"
-              variant="extended"
-              aria-label="add"
-              sx={{ height: "60px" }}
-              onClick={handleFazerReserva}
-            >
-              <Grid container alignItems="center">
-                <Grid item>
-                  <img
-                    src={relogioImage}
-                    alt="Fazer Reserva"
-                    width="50px"
-                    height="50px"
-                  />
+        {user.tipoUsuario.name === "client" && (
+          <Grid item>
+            <Box mt={1}>
+              <Fab
+                color="primary"
+                variant="extended"
+                aria-label="add"
+                sx={{ height: "60px" }}
+                onClick={handleFazerReserva}
+              >
+                <Grid container alignItems="center">
+                  <Grid item>
+                    <img
+                      src={relogioImage}
+                      alt="Fazer Reserva"
+                      width="50px"
+                      height="50px"
+                    />
+                  </Grid>
+                  <Grid item>
+                    <Typography>
+                      <strong>Fazer Reserva</strong>
+                    </Typography>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Typography>
-                    <strong>Fazer Reserva</strong>
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Fab>
-          </Box>
-        </Grid>
+              </Fab>
+            </Box>
+          </Grid>
+        )}
         <Grid item>
           <Box mt={5}>
             {user.tipoUsuario.name === "client" ? (

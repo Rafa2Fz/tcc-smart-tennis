@@ -22,7 +22,7 @@ const OpcaoQuadra: React.FC<Props> = ({ quadraId, onClick }) => {
               component="img"
               height="90px"
               image={quadraId === 1 ? aulaImagem : quadraTennnis}
-              alt="green iguana"
+              alt="Opcao Quadra"
             />
           </Grid>
           <Grid item>
