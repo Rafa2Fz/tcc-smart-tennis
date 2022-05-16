@@ -131,9 +131,11 @@ const CadastroReserva: React.FC = () => {
         quadraId: quadraId,
         personal: professor,
       });
-      let descontar = quadraId === 1 ? 20 : 30;
-      user.credito = user.credito - 20;
+      let descontar = creditoTotal();
       setAbrir(true);
+      if (descontar) {
+        user.credito = user.credito - descontar;
+      }
     } catch (error) {
       const err = error as AxiosError;
 

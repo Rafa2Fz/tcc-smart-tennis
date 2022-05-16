@@ -21,6 +21,7 @@ const OpcaoQuadra: React.FC<Props> = ({ quadraId, onClick }) => {
             <CardMedia
               component="img"
               height="80px"
+              width="80px"
               image={quadraId === 1 ? aulaImagem : quadraTennnis}
               sx={{}}
               alt="Opcao Quadra"
