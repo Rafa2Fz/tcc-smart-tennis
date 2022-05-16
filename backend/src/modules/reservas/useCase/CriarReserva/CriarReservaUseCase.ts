@@ -37,6 +37,8 @@ export class CriarReservaUseCase {
             personal = true
         }
 
+        let creditoTotal = 0
+
         const expedienteDia =[1, 2, 3, 4, 5]
         const expedienteHora =[6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17]
 
@@ -91,7 +93,20 @@ export class CriarReservaUseCase {
 
         const reservaCriada = await this.reservaQuadraRepositorio.criar(usuario, quadraId, reservaData, personal)
 
-        await usuario.debitarCredito(1)
+        if (quadraId) {
+            if (quadraId === 1) {
+                creditoTotal = 20
+            }
+            if (quadraId === 2) {
+              if (personal) {
+                creditoTotal = 30
+              } else {
+                creditoTotal = 20
+              }
+            }
+          }
+
+        await usuario.debitarCredito(creditoTotal)
 
         await this.usuarioRepositorio.atualizarCreditoUsuario(usuario)
 

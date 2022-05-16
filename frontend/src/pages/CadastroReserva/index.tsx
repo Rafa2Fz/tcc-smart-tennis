@@ -177,6 +177,20 @@ const CadastroReserva: React.FC = () => {
     setHoraReserva(null);
   };
 
+  const creditoTotal = () => {
+    if (quadraId) {
+      if (quadraId === 1) {
+        return 20;
+      }
+      if (quadraId === 2) {
+        if (professor) {
+          return 30;
+        } else {
+          return 20;
+        }
+      }
+    }
+  };
   return (
     <>
       <Cabecalho />
@@ -371,14 +385,16 @@ const CadastroReserva: React.FC = () => {
                         {format(new Date().setHours(horaReserva), "HH:00")}
                       </Button>
                     </Grid>
-                    <Grid item>
-                      <Box mt={1}>
-                        <Typography variant="h6">
-                          <strong>Créditos:</strong>
-                          {`${quadraId === 1 ? "20" : "30"}`}
-                        </Typography>
-                      </Box>
-                    </Grid>
+                    {quadraId && (
+                      <Grid item>
+                        <Box mt={1}>
+                          <Typography variant="h6">
+                            <strong>Créditos:</strong>
+                            {`${creditoTotal()}`}
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    )}
                     <Grid item>
                       <Box mt={1}>
                         <Button

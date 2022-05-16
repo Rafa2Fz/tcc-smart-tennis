@@ -100,18 +100,20 @@ const Cabecalho: React.FC = () => {
             )}
           </Grid>
 
-          <Box mr={2}>
-            <Grid container direction="column" alignItems="center">
-              <Grid item>
-                <BsCoin size={30} />
+          {user.tipoUsuario.id === 2 && (
+            <Box mr={2}>
+              <Grid container direction="column" alignItems="center">
+                <Grid item>
+                  <BsCoin size={30} />
+                </Grid>
+                <Grid item>
+                  <Box sx={{ fontSize: "15px", color: "primary.contrastText" }}>
+                    <strong>{user.credito}</strong>
+                  </Box>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Box sx={{ fontSize: "15px", color: "primary.contrastText" }}>
-                  <strong>{user.credito}</strong>
-                </Box>
-              </Grid>
-            </Grid>
-          </Box>
+            </Box>
+          )}
           <IconButton
             size="large"
             edge="start"
