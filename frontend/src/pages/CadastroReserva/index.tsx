@@ -44,8 +44,9 @@ const CadastroReserva: React.FC = () => {
 
   const expediente = [6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17];
 
-  const verificarDiasIndisponiveis = async () => {
+  const verificarDiasIndisponiveis = useCallback(async () => {
     if (date) {
+      setDiasIndisponiveis([]);
       try {
         const resposta = await api.post(
           "/reservas/verificarDiasIndisponiveisMes",
@@ -77,8 +78,12 @@ const CadastroReserva: React.FC = () => {
         }
       }
     }
-  };
-
+  }, [date, quadraId, addToast, logout]);
+  useEffect(() => {
+    if (date) {
+      verificarDiasIndisponiveis();
+    }
+  }, [date, verificarDiasIndisponiveis]);
   useEffect(() => {
     const verificaHorasIndisponiveis = async () => {
       try {
@@ -110,7 +115,7 @@ const CadastroReserva: React.FC = () => {
     if (date) {
       verificaHorasIndisponiveis();
     }
-  }, [date, addToast, showHoras]);
+  }, [date, addToast, logout, professor, quadraId]);
 
   const disableDays = useCallback(
     (day: Date) => {
@@ -259,15 +264,12 @@ const CadastroReserva: React.FC = () => {
                     disablePast
                     onMonthChange={(newDate) => {
                       setDate(newDate);
-                      verificarDiasIndisponiveis();
                     }}
                     onYearChange={(newDate) => {
                       setDate(newDate);
-                      verificarDiasIndisponiveis();
                     }}
                     onChange={(newDate) => {
                       setDate(newDate);
-                      verificarDiasIndisponiveis();
                       setShowHoras(true);
                       setHoraReserva(null);
                     }}

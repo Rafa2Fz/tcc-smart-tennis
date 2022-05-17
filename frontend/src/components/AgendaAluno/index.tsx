@@ -144,7 +144,7 @@ const AgendaAluno: React.FC = () => {
               let nome = reserva.usuario.nome;
               let quadraId = reserva.quadra.id;
               return (
-                <Box key={hora + "b"}>
+                <Box key={hora + reserva.id}>
                   <ReservaCard
                     codReserva={reserva.id}
                     quadraId={reserva.quadra.id}
