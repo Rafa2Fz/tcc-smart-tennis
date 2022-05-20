@@ -34,7 +34,7 @@ export class CriarUsuarioUseCase {
         
         const senhaCriptografada = await this.hashProvider.gerarHash(password, 8)
         
-        const emailAdmin = 'teste@gmail.com'
+        const emailAdmin = 'admin@admin.com'
 
         const usuario = await this.usuarioRepositorio.criar({
             nome,
