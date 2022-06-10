@@ -44,8 +44,11 @@ const Cabecalho: React.FC = () => {
     }
   }, [location.pathname]);
 
-  const handleAbrirModalCreditoForm = () => {
+  const handleAbrirCreditoForm = () => {
     navigate("/adicionaCredito");
+  };
+  const handleAbrirAgendarFolga = () => {
+    navigate("/adicionaFolga");
   };
   return (
     <Box>
@@ -168,9 +171,13 @@ const Cabecalho: React.FC = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleAbrirModalCreditoForm}>
-          Adiciona Crédito
-        </MenuItem>
+        {user.tipoUsuario.name === "admin" && (
+          <MenuItem onClick={handleAbrirCreditoForm}>Adiciona Crédito</MenuItem>
+        )}
+        {user.tipoUsuario.name === "admin" && (
+          <MenuItem onClick={handleAbrirAgendarFolga}>Agendar Folga</MenuItem>
+        )}
+
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <FiLogOut fontSize="small" />

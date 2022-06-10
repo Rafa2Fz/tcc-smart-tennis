@@ -120,7 +120,7 @@ const AdicionaCreditoForm: React.FC = () => {
       <Container maxWidth="sm">
         <Grid container direction="column" alignItems="center">
           <Grid item>
-            <Box mt={2}>
+            <Box m={2}>
               <Typography variant="h5">
                 Adicionar Crédito para o Aluno
               </Typography>

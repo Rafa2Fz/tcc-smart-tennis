@@ -44,13 +44,13 @@ export class CriarFolgaUseCase {
 
         
         if(reserva) {
-            throw new AppError('Existe reserva para essa data', 401)
+            throw new AppError('Existe reserva para essa data', 400)
         }
 
         const existeFolga = await this.folgaRepositorio.verificarFolga(dataFolga)
 
         if(existeFolga){
-            throw new AppError('Já existe uma folga para essa data', 401)
+            throw new AppError('Já existe uma folga para essa data', 400)
         }
 
         const folga = await this.folgaRepositorio.criar(dataFolga)

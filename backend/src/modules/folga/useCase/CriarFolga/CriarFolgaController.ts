@@ -7,7 +7,7 @@ export class CriarFolgaController {
    async index(request: Request, response: Response) {
     const criarFolgaUseCase = container.resolve(CriarFolgaUseCase)
    const usuarioId = request.usuario.id
-    const { data} = request.body
+    const { data } = request.body
 
    const folga = await criarFolgaUseCase.execute({usuarioId, data})
 
