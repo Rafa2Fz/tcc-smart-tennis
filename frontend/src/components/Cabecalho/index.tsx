@@ -11,7 +11,7 @@ import logo from "../../assets/logo.png";
 
 import { Avatar, Grid, Hidden, Link } from "@mui/material";
 import { BsCoin } from "react-icons/bs";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useUsuario } from "../../hooks/user";
 import { GoChevronLeft } from "react-icons/go";
 import Menu from "@mui/material/Menu";
@@ -24,6 +24,8 @@ const Cabecalho: React.FC = () => {
   const { user, logout } = useUsuario();
   const [dashboard, setDashboard] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  let navigate = useNavigate();
+
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -41,6 +43,10 @@ const Cabecalho: React.FC = () => {
       setDashboard(true);
     }
   }, [location.pathname]);
+
+  const handleAbrirModalCreditoForm = () => {
+    navigate("/adicionaCredito");
+  };
   return (
     <Box>
       <AppBar position="static">
@@ -162,6 +168,9 @@ const Cabecalho: React.FC = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
+        <MenuItem onClick={handleAbrirModalCreditoForm}>
+          Adiciona Crédito
+        </MenuItem>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <FiLogOut fontSize="small" />

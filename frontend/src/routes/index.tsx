@@ -1,6 +1,7 @@
 import React from "react";
 
 import { BrowserRouter, Routes as AppRoutes, Route } from "react-router-dom";
+import AdicionaCreditoForm from "../pages/AdicionaCreditoForm";
 import Cadastro from "../pages/Cadastro";
 import CadastroReserva from "../pages/CadastroReserva";
 import Dashboard from "../pages/Dashboard";
@@ -40,6 +41,14 @@ const Routes: React.FC = () => {
         element={
           <RequireAuth>
             <Cadastro />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/adicionaCredito"
+        element={
+          <RequireAuth isPrivate>
+            <AdicionaCreditoForm />
           </RequireAuth>
         }
       />
