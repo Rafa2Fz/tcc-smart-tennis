@@ -10,7 +10,11 @@ import { ReservaQuadraRepositorio } from 'modules/reservas/repositories/ReservaQ
 import { IFolgaRepositorio } from 'modules/folga/repositories/IFolgaRepositorio';
 import { FolgaRepositorio } from 'modules/folga/repositories/FolgaRepositorio';
 
+import { IPagamentoRepositorio } from 'modules/pagamento/repositories/IPagamentoRepositorio';
+import { PagamentoRepositorio } from 'modules/pagamento/repositories/PagamentoRepositorio';
+
 
 container.registerSingleton<IUsuarioRepositorio>('UsuarioRepositorio', UsuarioRepositorio)
 container.registerSingleton<IReservaQuadraRepositorio>('ReservaQuadraRepositorio', ReservaQuadraRepositorio)
 container.registerSingleton<IFolgaRepositorio>('FolgaRepositorio', FolgaRepositorio)
+container.registerSingleton<IPagamentoRepositorio>('PagamentoRepositorio', PagamentoRepositorio)

@@ -50,6 +50,9 @@ const Cabecalho: React.FC = () => {
   const handleAbrirAgendarFolga = () => {
     navigate("/adicionaFolga");
   };
+  const handleComprarCredito = () => {
+    navigate("/comprarCredito");
+  };
   return (
     <Box>
       <AppBar position="static">
@@ -177,6 +180,7 @@ const Cabecalho: React.FC = () => {
         {user.tipoUsuario.name === "admin" && (
           <MenuItem onClick={handleAbrirAgendarFolga}>Agendar Folga</MenuItem>
         )}
+        <MenuItem onClick={handleComprarCredito}>Comprar Crédito</MenuItem>
 
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>

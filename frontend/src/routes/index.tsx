@@ -5,6 +5,7 @@ import AdicionaCreditoForm from "../pages/AdicionaCreditoForm";
 import AgendarFolga from "../pages/AgendarFolga";
 import Cadastro from "../pages/Cadastro";
 import CadastroReserva from "../pages/CadastroReserva";
+import ComprarCredito from "../pages/ComprarCredito";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import RequireAuth from "./RequiredAuth";
@@ -58,6 +59,14 @@ const Routes: React.FC = () => {
         element={
           <RequireAuth isPrivate>
             <AgendarFolga />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/comprarCredito"
+        element={
+          <RequireAuth isPrivate>
+            <ComprarCredito />
           </RequireAuth>
         }
       />

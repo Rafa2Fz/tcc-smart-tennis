@@ -1,5 +1,6 @@
 import { AppError } from "shared/error/AppError";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import { Pagamento } from "./Pagamento";
 import { ReservaQuadra } from "./ReservaQuadra";
 import { TipoUsuario } from "./TipoUsuario";
 
@@ -28,6 +29,9 @@ export class Usuario {
 
     @OneToMany(() => ReservaQuadra, reservaQuadra => reservaQuadra.usuario)
     public reservaQuadra: ReservaQuadra[]
+
+    @OneToMany(() => Pagamento, (pagamento) => pagamento.usuario)
+    pagamentos: Pagamento[]
 
     public async debitarCredito(valor: number) {
         const usuarioCredito = this.getCredito
