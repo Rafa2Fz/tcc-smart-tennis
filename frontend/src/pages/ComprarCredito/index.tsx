@@ -92,7 +92,7 @@ const ComprarCredito: React.FC = () => {
           alignItems="center"
           alignContent="center"
         >
-          <Grid item ml={{ xs: "25%" }}>
+          <Grid item ml={{ xs: "15%" }}>
             <Grid
               container
               alignContent="center"
