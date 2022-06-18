@@ -180,7 +180,9 @@ const Cabecalho: React.FC = () => {
         {user.tipoUsuario.name === "admin" && (
           <MenuItem onClick={handleAbrirAgendarFolga}>Agendar Folga</MenuItem>
         )}
-        <MenuItem onClick={handleComprarCredito}>Comprar Crédito</MenuItem>
+        {user.tipoUsuario.name === "client" && (
+          <MenuItem onClick={handleComprarCredito}>Comprar Crédito</MenuItem>
+        )}
 
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>

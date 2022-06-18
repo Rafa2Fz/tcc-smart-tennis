@@ -48,13 +48,20 @@ export class CriarPagamentoUseCase {
         })
 
         let preference = {
+         
             items: [
-              {
-                title: pacote,
-                unit_price: total,
-                quantity: 1,
-              }
-            ]
+                {
+                  title: pacote,
+                  unit_price: total,
+                  quantity: 1,
+                }
+              ],
+              back_urls: {
+                success: "https://smart-tennis-front.herokuapp.com/dashboard",
+                failure: "https://smart-tennis-front.herokuapp.com/dashboard",
+                pending: "https://smart-tennis-front.herokuapp.com/dashboard",
+            },
+    
           };
 
        try {

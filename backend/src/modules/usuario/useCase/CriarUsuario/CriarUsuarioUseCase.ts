@@ -44,7 +44,7 @@ export class CriarUsuarioUseCase {
 
         })
 
-        usuario.setCredito = 100
+     
 
         await this.usuarioRepositorio.salvar(usuario)
 

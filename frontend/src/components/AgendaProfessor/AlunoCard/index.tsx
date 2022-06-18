@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 
 import quadraTennis from "../../../assets/quadraTennis.png";
 import aula from "../../../assets/bolaTennis.png";
+import { useUsuario } from "../../../hooks/user";
 
 interface AlunoCardProps {
   nome: string;
@@ -20,7 +21,7 @@ const AlunoCard: React.FC<AlunoCardProps> = ({ nome, quadraId }) => {
       <Grid container alignContent="center" alignItems="center">
         <Grid item>
           <Box ml={1} alignItems="center" alignContent="center">
-            <Avatar variant="square">R</Avatar>
+            <Avatar variant="circular">{nome.charAt(0)}</Avatar>
           </Box>
         </Grid>
         <Grid item sx={{ flexGrow: 1 }}>

@@ -19,7 +19,7 @@ import sacoCoin from "../../assets/sacoCoin.png";
 
 const ComprarCredito: React.FC = () => {
   let navigate = useNavigate();
-  let { user, logout } = useUsuario();
+  let { user, logout, atualizarUsuario } = useUsuario();
   const { addToast } = useToast();
 
   const [preferenceId, setPreferenceId] = useState(null);
@@ -36,6 +36,7 @@ const ComprarCredito: React.FC = () => {
       const { id } = response.data;
 
       setPreferenceId(id);
+      await atualizarUsuario();
     } catch (error) {
       const err = error as AxiosError;
 
@@ -69,8 +70,6 @@ const ComprarCredito: React.FC = () => {
                 },
                 autoOpen: true
                  
-            
-              
               })
               
         }`}
@@ -93,7 +92,7 @@ const ComprarCredito: React.FC = () => {
           alignItems="center"
           alignContent="center"
         >
-          <Grid item ml={{ xs: 13 }}>
+          <Grid item ml={{ xs: "25%" }}>
             <Grid
               container
               alignContent="center"
@@ -128,10 +127,12 @@ const ComprarCredito: React.FC = () => {
                           alignItems="center"
                           alignContent="center"
                         >
-                          <Grid item xs={12}></Grid>
-                          <Grid item>
-                            <strong>R$30,00</strong>
-                          </Grid>
+                          <Box height="50px">
+                            <Grid item xs={12}></Grid>
+                            <Grid item>
+                              <strong>R$30,00</strong>
+                            </Grid>
+                          </Box>
                         </Grid>
                       </Grid>
                       <Grid item>
@@ -139,7 +140,7 @@ const ComprarCredito: React.FC = () => {
                           <Button
                             variant="contained"
                             onClick={() => {
-                              handleComprarCredito("pacote100");
+                              handleComprarCredito("pacote30");
                             }}
                           >
                             Comprar
@@ -177,30 +178,32 @@ const ComprarCredito: React.FC = () => {
                         </Box>
                       </Grid>
                       <Grid item>
-                        <Grid
-                          container
-                          direction="column"
-                          alignItems="center"
-                          alignContent="center"
-                        >
-                          <Grid item xs={12}>
-                            <strong>
-                              <s>R$100,00</s>
-                            </strong>
+                        <Box height="50px">
+                          <Grid
+                            container
+                            direction="column"
+                            alignItems="center"
+                            alignContent="center"
+                          >
+                            <Grid item xs={12}>
+                              <strong>
+                                <s>R$100,00</s>
+                              </strong>
+                            </Grid>
+                            <Grid item>
+                              <strong>
+                                <text color="green">R$90,00</text>
+                              </strong>
+                            </Grid>
                           </Grid>
-                          <Grid item>
-                            <strong>
-                              <text color="green">R$90,00</text>
-                            </strong>
-                          </Grid>
-                        </Grid>
+                        </Box>
                       </Grid>
                       <Grid item>
                         <Box m={2}>
                           <Button
                             variant="contained"
                             onClick={() => {
-                              handleComprarCredito("pacote30");
+                              handleComprarCredito("pacote100");
                             }}
                           >
                             Comprar

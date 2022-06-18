@@ -9,6 +9,7 @@ interface IUserContext {
   logout(): Promise<void>;
   user: IUserPayload;
   login(email: string, password: string): Promise<void>;
+  atualizarUsuario(): Promise<void>;
 }
 
 interface IUserPayload {
@@ -81,8 +82,37 @@ export const UserProvider: React.FC = ({ children }) => {
     setData({} as AuthState);
   }, []);
 
+  const atualizarUsuario = useCallback(async () => {
+    try {
+      const resposta = await api.post("/usuario/buscar");
+      const usuario = resposta.data;
+
+      // const payload = jwt_decode<IUserPayload>(token);
+
+      const token = localStorage.getItem("@SmartTennis:token");
+      localStorage.setItem("@SmartTennis:user", JSON.stringify(usuario));
+
+      if (token) {
+        setData({ token, user: usuario });
+      } else {
+        await logout();
+      }
+    } catch (error) {
+      const err = error as AxiosError;
+      if (err.response) {
+        let message = err.response.data;
+        addToast({ text: message, type: "error" });
+      } else {
+        let message = err.message;
+        addToast({ text: message, type: "error" });
+      }
+    }
+  }, [addToast]);
+
   return (
-    <UserContext.Provider value={{ login, logout, user: data.user }}>
+    <UserContext.Provider
+      value={{ login, logout, user: data.user, atualizarUsuario }}
+    >
       {children}
     </UserContext.Provider>
   );
