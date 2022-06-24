@@ -27,7 +27,7 @@ export class CriarPagamentoUseCase {
  
         const produtos = {
             pacote100: ()=> {
-                return 90
+                return 100
             },
             pacote30: ()=>{
                 return 30 
