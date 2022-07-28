@@ -17,10 +17,6 @@ export default class FakeUsersRepository implements IUsuarioRepositorio {
     return user;
   }
 
-  public salvar(usuario: Usuario): Promise<Usuario> {
-    throw 'Not Implemented';
-  }
-
   public buscarPorId(id: string): Promise<Usuario> {
     throw 'Not Implemented';
   }
@@ -29,7 +25,9 @@ export default class FakeUsersRepository implements IUsuarioRepositorio {
     throw 'Not Implemented';
   }
 
-  public buscarPorEmail(email: string): Promise<Usuario> {
-    throw 'Not Implemented';
+  public async buscarPorEmail(email: string): Promise<Usuario | undefined> {
+    const usuario = this.usuarios.find((user) => user.email === email);
+
+    return usuario;
   }
 }
