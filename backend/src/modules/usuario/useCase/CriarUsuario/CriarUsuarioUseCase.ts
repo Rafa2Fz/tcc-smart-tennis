@@ -41,8 +41,6 @@ export class CriarUsuarioUseCase {
 
     });
 
-    await this.usuarioRepositorio.salvar(usuario);
-
     return usuario;
   }
 }
