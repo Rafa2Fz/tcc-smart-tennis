@@ -31,6 +31,12 @@ export class UsuarioRepositorio implements IUsuarioRepositorio {
       tipoUsuario,
     });
 
+    await this.salvar(usuario);
+
+    return usuario;
+  }
+
+  async salvar(usuario: Usuario): Promise<Usuario> {
     await this.usuarioRepositorio.save(usuario);
 
     delete usuario.password;

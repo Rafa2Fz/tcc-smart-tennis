@@ -1,6 +1,6 @@
 # Documentação e Artefatos
 
-Esse documento tem como objetivo apresentar e descrever o projeto final, fornecendo informações e artefatos sobre a concepção do produto, o seu planejamento, as decisões arquiteturais, desenvolvimento, testes/validação e conclusões.
+Esse documento tem como objetivo apresentar e descrever o projeto final do curso de Análise e Desenvolvimento de Sistemas da Faculdade Senac Porto Alegre, fornecendo informações e artefatos sobre a concepção do produto, o seu planejamento, as decisões arquiteturais, desenvolvimento, testes/validação e conclusões.
 
 ## [Canvas do Produto](https://github.com/Rafa2Fz/ProjetoDeDesenvolvimento/wiki/Canvas-do-Produto)
 

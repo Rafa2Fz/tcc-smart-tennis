@@ -40,15 +40,15 @@ const AgendarFolga: React.FC = () => {
     if (date) {
       setDiasIndisponiveis([]);
       try {
-        const resposta = await api.post(
+        const resposta = await api.get(
           "/reservas/verificarDiasIndisponiveisMes",
           {
-            date: {
+            params: {
               ano: date?.getFullYear(),
               mes: date?.getMonth(),
               dia: date?.getDate(),
-            },
-            quadraId: quadraId,
+              quadraId: quadraId,
+            }
           }
         );
 
