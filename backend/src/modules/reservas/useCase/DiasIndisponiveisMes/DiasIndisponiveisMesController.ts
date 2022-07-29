@@ -1,15 +1,18 @@
-import { Request, Response } from "express";
-import { container } from "tsyringe";
-import { DiasIndisponiveisMesUseCase } from "./DiasIndisponiveisMesUseCase";
+import { Request, Response } from 'express';
+import { container } from 'tsyringe';
+import { DiasIndisponiveisMesUseCase } from './DiasIndisponiveisMesUseCase';
 
 export class DiasIndisponiveisMesController {
+  async index(request: Request, response: Response) {
+    const diasIndisponiveisMesUseCase = container.resolve(DiasIndisponiveisMesUseCase);
+    const {
+      dia, mes, ano, quadraId,
+    } = request.query;
 
-    async index(request: Request, response: Response) {
-        const diasIndisponiveisMesUseCase = container.resolve(DiasIndisponiveisMesUseCase)
-        const {date, quadraId} = request.body
+    const indisponiveis = await diasIndisponiveisMesUseCase.execute({
+      dia: Number(dia), mes: Number(mes), ano: Number(ano), quadraId: Number(quadraId),
+    });
 
-        const indisponiveis = await diasIndisponiveisMesUseCase.execute({date, quadraId })
-       
-        response.json(indisponiveis)
-    }
+    response.json(indisponiveis);
+  }
 }

@@ -42,7 +42,7 @@ const schema = yup
 
 const AdicionaCreditoForm: React.FC = () => {
   const { addToast } = useToast();
-  const { logout, user } = useUsuario();
+  const { logout } = useUsuario();
   const [invalidUser, setInvalidUser] = useState(false);
   const { handleSubmit, control } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
@@ -57,9 +57,7 @@ const AdicionaCreditoForm: React.FC = () => {
     if (emailValido) {
       setUserResponseData(null);
       try {
-        const resposta = await api.post("/usuario/buscar", {
-          email,
-        });
+        const resposta = await api.get("/usuario", { params: { email }});
         setInvalidUser(false);
         setUserResponseData(resposta.data);
         console.log(resposta.data);

@@ -48,15 +48,15 @@ const CadastroReserva: React.FC = () => {
     if (date) {
       setDiasIndisponiveis([]);
       try {
-        const resposta = await api.post(
+        const resposta = await api.get(
           "/reservas/verificarDiasIndisponiveisMes",
-          {
-            date: {
-              ano: date?.getFullYear(),
-              mes: date?.getMonth(),
-              dia: date?.getDate(),
-            },
-            quadraId: quadraId,
+          { 
+            params: {
+                ano: date?.getFullYear(),
+                mes: date?.getMonth(),
+                dia: date?.getDate(),
+                quadraId: quadraId,
+            }
           }
         );
 
@@ -87,16 +87,16 @@ const CadastroReserva: React.FC = () => {
   useEffect(() => {
     const verificaHorasIndisponiveis = async () => {
       try {
-        const resposta = await api.post(
+        const resposta = await api.get(
           "/reservas/verificaHorasIndisponiveis",
           {
-            date: {
+            params: {
               ano: date?.getFullYear(),
               mes: date?.getMonth(),
               dia: date?.getDate(),
+              quadraId: quadraId,
+              personal: quadraId === 1 ? true : professor
             },
-            quadraId: quadraId,
-            personal: quadraId === 1 ? true : professor,
           }
         );
         setHorasIndisponiveis(resposta.data);

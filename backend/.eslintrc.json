@@ -20,6 +20,7 @@
     "import"
   ],
   "rules": {
+    "import/prefer-default-export": "off",
     "no-throw-literal": "off",
     "class-methods-use-this": "off",
     "import/no-unresolved": "error",
@@ -33,7 +34,8 @@
         "tsx": "never"
       }
     ],
-    "import/default": "off"
+    "import/default": "off",
+    "no-shadow": "warn"
   },
   "settings": {
     "import/extensions": [
