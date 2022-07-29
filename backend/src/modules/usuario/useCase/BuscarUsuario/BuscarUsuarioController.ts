@@ -6,7 +6,7 @@ export class BuscarUsuarioController {
   public async index(request: Request, response: Response) {
     const buscarUsuario = container.resolve(BuscarUsuarioUseCase);
 
-    const { email } = request.query;
+    const email = request.query.email as string;
 
     const tipoUsuarioRequest = request.usuario.tipoUsuario.name;
 

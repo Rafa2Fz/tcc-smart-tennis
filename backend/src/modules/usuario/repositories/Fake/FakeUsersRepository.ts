@@ -30,4 +30,8 @@ export default class FakeUsersRepository implements IUsuarioRepositorio {
 
     return usuario;
   }
+
+  public async salvar(usuario: Usuario): Promise<Usuario> {
+    throw 'Not Implemented';
+  }
 }

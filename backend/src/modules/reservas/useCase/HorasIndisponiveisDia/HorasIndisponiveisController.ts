@@ -10,9 +10,9 @@ export class HorasIndisponiveisController {
       ano, mes, dia, quadraId, personal,
     } = request.query;
     const usuarioId = request.usuario.id;
-
+    const isTrue = (personal === 'true');
     const indisponiveis = await horasIndisponiveisUseCase.execute({
-      dia: Number(dia), mes: Number(mes), ano: Number(ano), quadraId: Number(quadraId), personal, usuarioId,
+      dia: Number(dia), mes: Number(mes), ano: Number(ano), quadraId: Number(quadraId), personal: isTrue, usuarioId,
     });
 
     response.json(indisponiveis);
