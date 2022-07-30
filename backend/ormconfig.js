@@ -5,6 +5,7 @@ module.exports = {
   logging: false,
   extra: process.env.NODE_ENV === 'dev' ? {} : {
     ssl: {
+      ssl: true,
       rejectUnauthorized: false,
     },
   },
