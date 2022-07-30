@@ -84,7 +84,7 @@ export const UserProvider: React.FC = ({ children }) => {
 
   const atualizarUsuario = useCallback(async () => {
     try {
-      const resposta = await api.post("/usuario/buscar");
+      const resposta = await api.get("/usuario");
       const usuario = resposta.data;
 
       // const payload = jwt_decode<IUserPayload>(token);
