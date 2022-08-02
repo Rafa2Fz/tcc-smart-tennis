@@ -18,6 +18,7 @@ import coin from "../../assets/coin.png";
 import sacoCoin from "../../assets/sacoCoin.png";
 
 const ComprarCredito: React.FC = () => {
+  const titulo = 'Comprar Créditos'
   let navigate = useNavigate();
   let { user, logout, atualizarUsuario } = useUsuario();
   const { addToast } = useToast();
@@ -79,7 +80,7 @@ const ComprarCredito: React.FC = () => {
 
   return (
     <>
-      <Cabecalho />
+      <Cabecalho titulo={titulo}/>
       <Helmet>
         <script src="https://sdk.mercadopago.com/js/v2"></script>
         {preferenceId && scriptPagamento()}

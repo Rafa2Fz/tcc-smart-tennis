@@ -19,7 +19,11 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { FiLogOut } from "react-icons/fi";
 
-const Cabecalho: React.FC = () => {
+interface CabecalhoProps  {
+  titulo?: string;
+}
+
+const Cabecalho: React.FC<CabecalhoProps> = ({titulo = " "}) => {
   const location = useLocation();
   const { user, logout } = useUsuario();
   const [dashboard, setDashboard] = useState(false);
@@ -73,16 +77,23 @@ const Cabecalho: React.FC = () => {
             {dashboard === false && (
               <Box sx={{ flexGrow: 1 }}>
                 <Hidden smUp={true}>
-                  <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 2 }}
-                    href="/dashboard"
-                  >
-                    <GoChevronLeft />
-                  </IconButton>
+                  <Grid container alignContent="center" alignItems="center">
+                    <Grid item>
+                      <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        
+                        href="/dashboard"
+                      >
+                        <GoChevronLeft />
+                      </IconButton>
+                    </Grid>
+                    <Grid item>
+                      <Typography>{titulo}</Typography>
+                    </Grid>
+                  </Grid>
                 </Hidden>
               </Box>
             )}

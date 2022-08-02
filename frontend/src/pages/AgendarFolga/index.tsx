@@ -22,6 +22,7 @@ import OpcaoQuadra from "../../components/OpcaoQuadra";
 import Cabecalho from "../../components/Cabecalho";
 
 const AgendarFolga: React.FC = () => {
+  const titulo = 'Agendar Folga';
   const { logout, user } = useUsuario();
   const { addToast } = useToast();
   const [date, setDate] = useState<Date | null>();
@@ -115,7 +116,7 @@ const AgendarFolga: React.FC = () => {
 
   return (
     <>
-      <Cabecalho />
+      <Cabecalho titulo={titulo} />
 
       <Container maxWidth="xs">
         <Grid

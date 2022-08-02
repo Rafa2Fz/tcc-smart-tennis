@@ -41,6 +41,7 @@ const schema = yup
   .required();
 
 const AdicionaCreditoForm: React.FC = () => {
+  const titulo = 'Adicionar Crédito';
   const { addToast } = useToast();
   const { logout } = useUsuario();
   const [invalidUser, setInvalidUser] = useState(false);
@@ -114,7 +115,7 @@ const AdicionaCreditoForm: React.FC = () => {
   };
   return (
     <>
-      <Cabecalho />
+      <Cabecalho titulo={titulo}/>
       <Container maxWidth="sm">
         <Grid container direction="column" alignItems="center">
           <Grid item>

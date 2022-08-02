@@ -27,6 +27,7 @@ import ModalConfirmacao from "../../components/ModalConfirmacao";
 import Cabecalho from "../../components/Cabecalho";
 
 const CadastroReserva: React.FC = () => {
+  const titulo = 'Cadastro Reserva';
   const { logout, user } = useUsuario();
   const { addToast } = useToast();
   const [date, setDate] = useState<Date | null>();
@@ -200,7 +201,7 @@ const CadastroReserva: React.FC = () => {
   };
   return (
     <>
-      <Cabecalho />
+      <Cabecalho  titulo={titulo}/>
       <ModalConfirmacao abrir={abrir} />
       <Container maxWidth="xs">
         <Box mt="15px">
