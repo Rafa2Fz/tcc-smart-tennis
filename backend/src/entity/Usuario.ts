@@ -22,6 +22,9 @@ export class Usuario {
     @Column({ nullable: true, default: 0 })
     private credito: number
 
+    @Column({ nullable: true })
+    public avatar: string;
+
     @ManyToOne(() => TipoUsuario, { eager: true })
     public tipoUsuario: TipoUsuario
 
@@ -48,6 +51,14 @@ export class Usuario {
     }
     get getCredito() {
         return this.credito
+    }
+
+    get avatarUrl() {
+        if(this.avatar) {
+            return `/usuario/avatar/${this.id}/${this.avatar}`
+        } else {
+            return null
+        }    
     }
 
     toJSON () {

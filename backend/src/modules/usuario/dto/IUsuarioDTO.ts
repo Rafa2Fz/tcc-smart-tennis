@@ -1,9 +1,10 @@
-import { TipoUsuario } from "entity/TipoUsuario";
+import { TipoUsuario } from 'entity/TipoUsuario';
 
 export interface IUsuarioDTO {
     id?: string;
     nome: string;
     email: string;
     tipoUsuario: TipoUsuario;
-    credito?: number
+    credito?: number;
+    avatar_url: string;
 }

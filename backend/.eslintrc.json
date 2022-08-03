@@ -20,6 +20,7 @@
     "import"
   ],
   "rules": {
+    "no-useless-constructor": "off",
     "import/prefer-default-export": "off",
     "no-throw-literal": "off",
     "class-methods-use-this": "off",
