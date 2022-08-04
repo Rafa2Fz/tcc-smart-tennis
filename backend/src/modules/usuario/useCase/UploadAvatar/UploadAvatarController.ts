@@ -1,6 +1,6 @@
-import { Request } from 'express';
-import { container } from 'tsyringe';
-import UploadAvatar from './UploadAvatar';
+import { Request } from "express";
+import { container } from "tsyringe";
+import UploadAvatar from "./UploadAvatar";
 
 export default class UploadAvatarController {
   async index(request: Request, response: Response) {
@@ -9,7 +9,10 @@ export default class UploadAvatarController {
 
     const uploadAvatar = container.resolve(UploadAvatar);
 
-    const usuario = await uploadAvatar.execute({ arquivo: filename, userId: id });
-    response.json(usuario);
+    const usuario = await uploadAvatar.execute({
+      arquivo: filename,
+      userId: id,
+    });
+    return response.json(usuario);
   }
 }
