@@ -25,6 +25,9 @@ export class ReservasAlunosUseCase {
         const verificaData = new Date(ano, mes, dia)
         verificaData.setHours(0)
         const reservas = await this.reservaQuadraRepositorio.buscarReservasDia(verificaData)
+        reservas.forEach(
+      (reservas) => reservas.usuario.avatar = reservas.usuario.avatarUrl
+    );
         return reservas
     }
  }

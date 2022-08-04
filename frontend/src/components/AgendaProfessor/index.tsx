@@ -27,6 +27,7 @@ interface ReservaQudara {
   personal: boolean;
   usuario: {
     nome: string;
+    avatar: string | null;
   };
 }
 
@@ -102,9 +103,15 @@ const AgendaProfessor: React.FC = () => {
         if (hora === horaReserva) {
           let nome = reserva.usuario.nome;
           let quadraId = reserva.quadra.id;
+
+          console.log(reserva.usuario);
           return (
             <Box>
-              <AlunoCard nome={nome} quadraId={quadraId} />
+              <AlunoCard
+                avatar_url={reserva.usuario.avatar}
+                nome={nome}
+                quadraId={quadraId}
+              />
             </Box>
           );
         }
