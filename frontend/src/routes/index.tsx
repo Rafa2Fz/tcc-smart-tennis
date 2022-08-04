@@ -8,6 +8,7 @@ import CadastroReserva from "../pages/CadastroReserva";
 import ComprarCredito from "../pages/ComprarCredito";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
+import Perfil from "../pages/Perfil";
 import RequireAuth from "./RequiredAuth";
 
 const Routes: React.FC = () => {
@@ -47,6 +48,14 @@ const Routes: React.FC = () => {
         }
       />
       <Route
+        path="/perfil"
+        element={
+          <RequireAuth isPrivate>
+            <Perfil />
+          </RequireAuth>
+        }
+      />
+       <Route
         path="/adicionaCredito"
         element={
           <RequireAuth isPrivate>

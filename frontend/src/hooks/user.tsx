@@ -21,6 +21,7 @@ interface IUserPayload {
     name: string;
   };
   credito: number;
+  avatar_url: string;
 }
 
 interface AuthState {

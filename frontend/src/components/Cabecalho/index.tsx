@@ -4,7 +4,6 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 
 import logo from "../../assets/logo.png";
@@ -18,12 +17,13 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { FiLogOut } from "react-icons/fi";
+import api from "../../config/connection";
 
-interface CabecalhoProps  {
+interface CabecalhoProps {
   titulo?: string;
 }
 
-const Cabecalho: React.FC<CabecalhoProps> = ({titulo = " "}) => {
+const Cabecalho: React.FC<CabecalhoProps> = ({ titulo = " " }) => {
   const location = useLocation();
   const { user, logout } = useUsuario();
   const [dashboard, setDashboard] = useState(false);
@@ -84,7 +84,6 @@ const Cabecalho: React.FC<CabecalhoProps> = ({titulo = " "}) => {
                         edge="start"
                         color="inherit"
                         aria-label="menu"
-                        
                         href="/dashboard"
                       >
                         <GoChevronLeft />
@@ -144,7 +143,12 @@ const Cabecalho: React.FC<CabecalhoProps> = ({titulo = " "}) => {
             aria-label="menu"
             onClick={handleClick}
           >
-            <Avatar sx={{ bgcolor: "secondary.main" }}>
+            <Avatar
+              sx={{ bgcolor: "secondary.main" }}
+              src={`${
+                user.avatar_url && `${api.defaults.baseURL}${user.avatar_url}`
+              }`}
+            >
               {user.nome.charAt(0)}
             </Avatar>
           </IconButton>
@@ -185,6 +189,7 @@ const Cabecalho: React.FC<CabecalhoProps> = ({titulo = " "}) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
+        <MenuItem onClick={() => navigate("/perfil")}>Perfil</MenuItem>
         {user.tipoUsuario.name === "admin" && (
           <MenuItem onClick={handleAbrirCreditoForm}>Adiciona Crédito</MenuItem>
         )}
