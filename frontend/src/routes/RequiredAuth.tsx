@@ -11,7 +11,7 @@ function RequireAuth({ isPrivate = false, children }: IRequiredAuth) {
   const { atualizarUsuario } = useUsuario();
   let location = useLocation();
   useEffect(() => {
-    atualizarUsuario();
+    if (isPrivate) atualizarUsuario();
   }, [location, atualizarUsuario]);
   return isPrivate === !!auth.user ? (
     children
