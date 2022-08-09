@@ -2,33 +2,27 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import Grid from "@mui/material/Grid";
 
-import { Box, Button, Container, Fab, Paper, Typography } from "@mui/material";
+import { Box, Button, Container, Paper, Typography } from "@mui/material";
 
 import { useToast } from "../../hooks/toast";
 import { useUsuario } from "../../hooks/user";
-import Cabecalho from "../../components/Cabecalho";
 
-import { BsCoin } from "react-icons/bs";
-
-import { useNavigate } from "react-router-dom";
 import api from "../../config/connection";
 import { AxiosError } from "axios";
 import { Helmet } from "react-helmet";
 import coin from "../../assets/coin.png";
 import sacoCoin from "../../assets/sacoCoin.png";
+import { useDashboard } from "../../hooks/dashboard";
 
 const ComprarCredito: React.FC = () => {
-  const titulo = 'Comprar Créditos'
-  let navigate = useNavigate();
-  let { user, logout, atualizarUsuario } = useUsuario();
+  let { logout, atualizarUsuario } = useUsuario();
   const { addToast } = useToast();
-
   const [preferenceId, setPreferenceId] = useState(null);
+  const { addTitulo } = useDashboard();
 
-  const handleFazerReserva = () => {
-    navigate("/cadastroReserva");
-  };
-
+  useEffect(() => {
+    addTitulo("Comprar Crédito");
+  });
   const handleComprarCredito = async (pacote: string) => {
     try {
       const response = await api.post("/pagamento", {
@@ -80,7 +74,6 @@ const ComprarCredito: React.FC = () => {
 
   return (
     <>
-      <Cabecalho titulo={titulo}/>
       <Helmet>
         <script src="https://sdk.mercadopago.com/js/v2"></script>
         {preferenceId && scriptPagamento()}

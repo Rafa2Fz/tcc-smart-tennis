@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ChangeEventHandler, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Cabecalho from "../../components/Cabecalho";
 import {
@@ -22,6 +22,7 @@ import { useToast } from "../../hooks/toast";
 import { useUsuario } from "../../hooks/user";
 import { BsCoin } from "react-icons/bs";
 import bolaImage from "../../assets/bolaTennis.png";
+import { useDashboard } from "../../hooks/dashboard";
 
 interface IFormInputs {
   quantidade: number;
@@ -41,7 +42,6 @@ const schema = yup
   .required();
 
 const AdicionaCreditoForm: React.FC = () => {
-  const titulo = "Adicionar Crédito";
   const { addToast } = useToast();
   const { logout } = useUsuario();
   const [invalidUser, setInvalidUser] = useState(false);
@@ -49,6 +49,12 @@ const AdicionaCreditoForm: React.FC = () => {
     resolver: yupResolver(schema),
   });
   const [userResponseData, setUserResponseData] = useState<IUser | null>(null);
+
+  const { addTitulo } = useDashboard();
+
+  useEffect(() => {
+    addTitulo("Adicionar Crédito");
+  });
   const handleChange = async (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | undefined
   ) => {

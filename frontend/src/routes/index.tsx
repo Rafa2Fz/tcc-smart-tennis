@@ -46,9 +46,25 @@ const Routes: React.FC = () => {
             </RequireAuth>
           }
         />
+        <Route
+          path="adicionaFolga"
+          element={
+            <RequireAuth isPrivate>
+              <AgendarFolga />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="comprarCredito"
+          element={
+            <RequireAuth isPrivate>
+              <ComprarCredito />
+            </RequireAuth>
+          }
+        />
       </Route>
       <Route
-        path="cadastroReserva"
+        path="/cadastroReserva"
         element={
           <RequireAuth isPrivate>
             <CadastroReserva />
@@ -61,23 +77,6 @@ const Routes: React.FC = () => {
         element={
           <RequireAuth>
             <Cadastro />
-          </RequireAuth>
-        }
-      />
-
-      <Route
-        path="/adicionaFolga"
-        element={
-          <RequireAuth isPrivate>
-            <AgendarFolga />
-          </RequireAuth>
-        }
-      />
-      <Route
-        path="/comprarCredito"
-        element={
-          <RequireAuth isPrivate>
-            <ComprarCredito />
           </RequireAuth>
         }
       />

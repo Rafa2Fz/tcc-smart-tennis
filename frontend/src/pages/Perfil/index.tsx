@@ -13,7 +13,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import Cabecalho from "../../components/Cabecalho";
+
 import { useUsuario } from "../../hooks/user";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -21,7 +21,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useToast } from "../../hooks/toast";
 import { AxiosError } from "axios";
 import api from "../../config/connection";
-import { useOutletContext } from "react-router-dom";
+import { useDashboard } from "../../hooks/dashboard";
 
 const schema = yup
   .object({
@@ -38,9 +38,7 @@ interface IFormInputs {
   password: string;
   sobrenome: string;
 }
-type IAddTitulo = {
-  addTitulo(titulo: string): void;
-};
+
 const Perfil: React.FC = () => {
   const { user, logout, atualizarUsuario } = useUsuario();
   const [arquivoSelecionado, setArquivoSelecionado] = useState(undefined);
@@ -54,12 +52,12 @@ const Perfil: React.FC = () => {
     }
   );
 
-  const { handleSubmit, control } = useForm<IFormInputs>({
+  const { control } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
   });
   const { addToast } = useToast();
   const formData = new FormData();
-  const { addTitulo } = useOutletContext<IAddTitulo>();
+  const { addTitulo } = useDashboard();
 
   useEffect(() => {
     addTitulo("Perfil");
@@ -107,7 +105,6 @@ const Perfil: React.FC = () => {
 
   return (
     <>
-      <Cabecalho outlet={true} />
       <Container>
         <Grid
           container

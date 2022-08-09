@@ -54,15 +54,6 @@ const Cabecalho: React.FC<CabecalhoProps> = ({
     }
   }, [location.pathname]);
 
-  const handleAbrirCreditoForm = () => {
-    navigate("adicionaCredito");
-  };
-  const handleAbrirAgendarFolga = () => {
-    navigate("/adicionaFolga");
-  };
-  const handleComprarCredito = () => {
-    navigate("/comprarCredito");
-  };
   return (
     <Box>
       {!outlet && (
@@ -206,17 +197,29 @@ const Cabecalho: React.FC<CabecalhoProps> = ({
           >
             <MenuItem onClick={() => navigate("perfil")}>Perfil</MenuItem>
             {user.tipoUsuario.name === "admin" && (
-              <MenuItem onClick={handleAbrirCreditoForm}>
+              <MenuItem
+                onClick={() => {
+                  navigate("adicionaCredito");
+                }}
+              >
                 Adiciona Crédito
               </MenuItem>
             )}
             {user.tipoUsuario.name === "admin" && (
-              <MenuItem onClick={handleAbrirAgendarFolga}>
+              <MenuItem
+                onClick={() => {
+                  navigate("adicionaFolga");
+                }}
+              >
                 Agendar Folga
               </MenuItem>
             )}
             {user.tipoUsuario.name === "client" && (
-              <MenuItem onClick={handleComprarCredito}>
+              <MenuItem
+                onClick={() => {
+                  navigate("comprarCredito");
+                }}
+              >
                 Comprar Crédito
               </MenuItem>
             )}

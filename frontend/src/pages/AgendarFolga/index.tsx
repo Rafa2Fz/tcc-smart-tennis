@@ -16,13 +16,10 @@ import { Container } from "@mui/material";
 
 import { useToast } from "../../hooks/toast";
 import { useUsuario } from "../../hooks/user";
-import { format } from "date-fns";
-import OpcaoQuadra from "../../components/OpcaoQuadra";
-
-import Cabecalho from "../../components/Cabecalho";
+import { useDashboard } from "../../hooks/dashboard";
 
 const AgendarFolga: React.FC = () => {
-  const titulo = 'Agendar Folga';
+  const titulo = "Agendar Folga";
   const { logout, user } = useUsuario();
   const { addToast } = useToast();
   const [date, setDate] = useState<Date | null>();
@@ -34,9 +31,12 @@ const AgendarFolga: React.FC = () => {
   const [showOpcoes, setShowOpcoes] = useState<boolean>(false);
   const [showHoras, setShowHoras] = useState<boolean>(false);
   const [abrir, setAbrir] = React.useState(false);
-
   const [horaReserva, setHoraReserva] = useState<number | null>();
+  const { addTitulo } = useDashboard();
 
+  useEffect(() => {
+    addTitulo("Agendar Folga");
+  });
   const verificarDiasIndisponiveis = useCallback(async () => {
     if (date) {
       setDiasIndisponiveis([]);
@@ -49,7 +49,7 @@ const AgendarFolga: React.FC = () => {
               mes: date?.getMonth(),
               dia: date?.getDate(),
               quadraId: quadraId,
-            }
+            },
           }
         );
 
@@ -116,8 +116,6 @@ const AgendarFolga: React.FC = () => {
 
   return (
     <>
-      <Cabecalho titulo={titulo} />
-
       <Container maxWidth="xs">
         <Grid
           container

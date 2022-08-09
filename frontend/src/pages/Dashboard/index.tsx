@@ -4,7 +4,6 @@ import Grid from "@mui/material/Grid";
 
 import { Box, Fab, Typography } from "@mui/material";
 
-import { useToast } from "../../hooks/toast";
 import { useUsuario } from "../../hooks/user";
 import Cabecalho from "../../components/Cabecalho";
 import AgendaAluno from "../../components/AgendaAluno";
@@ -13,10 +12,6 @@ import AgendaProfessor from "../../components/AgendaProfessor";
 import relogioImage from "../../assets/bolaRelogio.png";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
-type IAddTitulo = {
-  addTitulo(titulo: string): void;
-};
-
 const Dashboard: React.FC = () => {
   let navigate = useNavigate();
   let { user } = useUsuario();
@@ -24,9 +19,9 @@ const Dashboard: React.FC = () => {
   const [showOutlet, setShowOutlet] = useState(false);
   const [title, setTitle] = useState<string>();
 
-  let addTitulo = (titulo: string) => {
+  let addTitulo = useCallback((titulo: string) => {
     setTitle(titulo);
-  };
+  }, []);
 
   const handleFazerReserva = () => {
     navigate("/cadastroReserva");
