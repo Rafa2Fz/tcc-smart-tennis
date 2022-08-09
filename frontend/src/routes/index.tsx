@@ -29,7 +29,24 @@ const Routes: React.FC = () => {
             <Dashboard />
           </RequireAuth>
         }
-      />
+      >
+        <Route
+          path="perfil"
+          element={
+            <RequireAuth isPrivate>
+              <Perfil />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="adicionaCredito"
+          element={
+            <RequireAuth isPrivate>
+              <AdicionaCreditoForm />
+            </RequireAuth>
+          }
+        />
+      </Route>
       <Route
         path="cadastroReserva"
         element={
@@ -47,22 +64,7 @@ const Routes: React.FC = () => {
           </RequireAuth>
         }
       />
-      <Route
-        path="/perfil"
-        element={
-          <RequireAuth isPrivate>
-            <Perfil />
-          </RequireAuth>
-        }
-      />
-       <Route
-        path="/adicionaCredito"
-        element={
-          <RequireAuth isPrivate>
-            <AdicionaCreditoForm />
-          </RequireAuth>
-        }
-      />
+
       <Route
         path="/adicionaFolga"
         element={

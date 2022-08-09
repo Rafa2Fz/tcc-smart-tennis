@@ -21,6 +21,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useToast } from "../../hooks/toast";
 import { AxiosError } from "axios";
 import api from "../../config/connection";
+import { useOutletContext } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -37,7 +38,9 @@ interface IFormInputs {
   password: string;
   sobrenome: string;
 }
-
+type IAddTitulo = {
+  addTitulo(titulo: string): void;
+};
 const Perfil: React.FC = () => {
   const { user, logout, atualizarUsuario } = useUsuario();
   const [arquivoSelecionado, setArquivoSelecionado] = useState(undefined);
@@ -50,12 +53,17 @@ const Perfil: React.FC = () => {
       }
     }
   );
+
   const { handleSubmit, control } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
   });
   const { addToast } = useToast();
   const formData = new FormData();
+  const { addTitulo } = useOutletContext<IAddTitulo>();
 
+  useEffect(() => {
+    addTitulo("Perfil");
+  });
   useEffect(() => {
     if (arquivoSelecionado) {
       const objectUrl = URL.createObjectURL(arquivoSelecionado);
@@ -99,7 +107,7 @@ const Perfil: React.FC = () => {
 
   return (
     <>
-      <Cabecalho titulo="Perfil" />
+      <Cabecalho outlet={true} />
       <Container>
         <Grid
           container

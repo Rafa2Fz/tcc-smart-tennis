@@ -41,7 +41,7 @@ const schema = yup
   .required();
 
 const AdicionaCreditoForm: React.FC = () => {
-  const titulo = 'Adicionar Crédito';
+  const titulo = "Adicionar Crédito";
   const { addToast } = useToast();
   const { logout } = useUsuario();
   const [invalidUser, setInvalidUser] = useState(false);
@@ -58,7 +58,7 @@ const AdicionaCreditoForm: React.FC = () => {
     if (emailValido) {
       setUserResponseData(null);
       try {
-        const resposta = await api.get("/usuario", { params: { email }});
+        const resposta = await api.get("/usuario", { params: { email } });
         setInvalidUser(false);
         setUserResponseData(resposta.data);
         console.log(resposta.data);
@@ -115,7 +115,7 @@ const AdicionaCreditoForm: React.FC = () => {
   };
   return (
     <>
-      <Cabecalho titulo={titulo}/>
+      <Cabecalho outlet={true} />
       <Container maxWidth="sm">
         <Grid container direction="column" alignItems="center">
           <Grid item>
