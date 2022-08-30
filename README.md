@@ -2,6 +2,8 @@
 
 Esse documento tem como objetivo apresentar e descrever o projeto final do curso de Análise e Desenvolvimento de Sistemas da Faculdade Senac Porto Alegre, fornecendo informações e artefatos sobre a concepção do produto, o seu planejamento, as decisões arquiteturais, desenvolvimento, testes/validação e conclusões.
 
+## [Medium](https://medium.com/@rafaelferreira_61991/documentando-um-projeto-final-de-ads-d7685c799846)
+
 ## [Canvas do Produto](https://github.com/Rafa2Fz/ProjetoDeDesenvolvimento/wiki/Canvas-do-Produto)
 
 ## [Protótipos de Interface](https://github.com/Rafa2Fz/ProjetoDeDesenvolvimento/wiki/Prot%C3%B3tipos-de-Interface)
@@ -13,3 +15,4 @@ Esse documento tem como objetivo apresentar e descrever o projeto final do curso
 ## [Fluxograma](https://github.com/Rafa2Fz/ProjetoDeDesenvolvimento/wiki/Fluxograma)
 
 ## [Diagrama de caso de Uso](https://github.com/Rafa2Fz/ProjetoDeDesenvolvimento/wiki/Diagrama-de-Caso-de-Uso)
+
